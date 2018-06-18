@@ -1,0 +1,161 @@
+body {
+  /* height: 467px; */
+
+}
+
+.background-img {
+  background: url("/images/homepage.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  position: absolute;
+  width: 375px;
+  height: 467px;
+  left: 0px;
+  top: -1px;
+}
+
+.day {
+  position: absolute;
+  width: 51.04px;
+  height: 27.06px;
+  left: 323.96px;
+  top: 13.71px;
+
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 18px;
+
+  color: #FFFFFF;
+}
+
+.logo {
+  background: url("/images/logo-icon.jpg");
+  position: absolute;
+  display: inline-block;
+  width: 45px;
+  height: 40px;
+  left: 270px;
+}
+
+.sidebar {
+  width: 31px;
+  height: 29px;
+  left: 15px;
+  top: 14px;
+
+  background: #FFFBFB;
+}
+
+.mobile-lines-1 {
+  top: 0;
+  color: red;
+  height: 1px;
+}
+
+.mobile-lines-2 {
+  top: 7px;
+  color: red;
+}
+
+.mobile-lines-3 {
+  top: 14px;
+  color: red;
+}
+
+.lines {
+  position: absolute;
+  margin-bottom: 5px;
+  opacity: .8;
+}
+
+/* .logo-box {
+  position: absolute;
+  width: 29.28px;
+  height: 28.68px;
+  left: 288.73px;
+  top: 12.12px;
+
+  background: #FFFFFF;
+} */
+
+a {
+	text-decoration: none;
+}
+
+.display-start {
+  position: absolute;
+  width: 217px;
+  height: 85px;
+  left: 75px;
+  top: 133px;
+
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 24px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.rectangle {
+  position: absolute;
+  width: 217px;
+  height: 158px;
+  left: 75px;
+  top: 260px;
+  background: #7C1818;
+}
+
+.email-query {
+  position: absolute;
+  width: 173px;
+  height: 33px;
+  left: 15px;
+  top: 15px;
+  background: #FFF9F9;
+}
+
+.pw-query {
+  position: absolute;
+  width: 173px;
+  height: 33px;
+  left: 15px;
+  top: 68px;
+  background: #FFFFFF;
+}
+
+.submit-signup {
+  font-size: 13px;
+  position: absolute;
+  width: 65px;
+  height: 28px;
+  left: 40px;
+  top: 117px;
+  background: #FFFFFF;
+}
+
+.submit-login {
+  font-size: 13px;
+  position: absolute;
+  width: 65px;
+  height: 28px;
+  left: 110px;
+  top: 117px;
+  background: #FFFFFF;
+}
+
+.about-section {
+  /* width: 137px;
+  height: 29px;
+  left: 118px;
+  top: 534px; */
+  margin: 0px;
+
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 24px;
+  color: white;
+}
