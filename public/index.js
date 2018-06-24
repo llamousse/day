@@ -1,7 +1,6 @@
 $(window).on("scroll", function(){
-  // alert("works")
   console.log($(window).scrollTop());
-  if($(window).scrollTop() > 510){
+  if($(window).scrollTop() > 350){
     $(".home-nav").css("background-color", "#94806A");
   }
   else {
