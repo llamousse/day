@@ -33,11 +33,14 @@
         </div>
 
         <div class="rectangle">
-          <form action="#" class="search-form" id="search-query-form" method="post">
-            <button type="submit" class="field side-align submit-login">Log In</button>
-            <button type="submit" class="field side-align submit-signup">Sign Up</button>
-            <input type="text" placeholder="Email Address" class="field" id="search-term" required>
-            <input type="text" placeholder="Password" class="field" id="log-in-check" required>
+          <form action="#" class="search-form" id="search-query-form">
+            <button type="submit" class="field side-align submit-login" id="login">Log In</button>
+            <button type="submit" class="field side-align submit-signup" id="signup">Sign Up</button>
+            <input type="text" placeholder="First Name" class="field hide-this" id="firstname">
+            <input type="text" placeholder="Last Name" class="field hide-this" id="lastname">
+            <input type="text" placeholder="Email Address" class="field" id="email">
+            <input type="text" placeholder="Password" class="field" id="password">
+            <button type="submit" class="field submit-button" id="sub">Submit</button>
           </form>
         </div>
 

@@ -89,12 +89,22 @@ a {
   display: block;
   margin: 15px 0;
   border: none;
-  padding: 5px;
+}
+
+.hide-this {
+  display: none;
+}
+
+.submit-button {
+  width: 50%;
+  margin-left: 114px;
+  max-width: 50%;
 }
 
 .side-align {
   width: 50%;
   float: right;
+  border: 1px solid slategrey;
 }
 
 .submit-signup {
@@ -114,7 +124,8 @@ a {
 }
 
 form.search-form button:hover {
-	background-color: #82CEEF;
+	/* background-color: #82CEEF; */
+  background-color: #B0E2F8;
   cursor: pointer;
 }
 
@@ -156,5 +167,6 @@ form.search-form button:hover {
 .foot-nav {
   margin-top: 30px;
   height: 65px;
-  background-color: #94806A;
+  background-color: #4FA0B9;
+  /* background-color: #94806A; */
 }
