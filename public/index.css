@@ -44,6 +44,7 @@ a {
   top: 0;
   right: 0;
   left: 0;
+  z-index: 3;
 }
 
 .sidebar {
@@ -89,9 +90,11 @@ a {
   display: block;
   margin: 15px 0;
   border: none;
+  padding: 0 8px;
+  box-sizing: border-box;
 }
 
-.hide-this {
+.hidden {
   display: none;
 }
 
@@ -107,16 +110,16 @@ a {
   border: 1px solid slategrey;
 }
 
-.submit-signup {
+#signup {
   font-size: 13px;
   height: 28px;
-  background: #ffffff;
+  background-color: #ffffff;
 }
 
-.submit-login {
+#login {
   font-size: 13px;
   height: 28px;
-  background: #ffffff;
+  background-color: #B0E2F8;
 }
 
 .search-form {
@@ -170,12 +173,24 @@ form.search-form button:hover {
   background-color: #94806A;
 }
 
+.sidebar-top{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 65px;
+  background-color: #94806A;
+  z-index: 2;
+}
+
 /* LOAD PAGE SIDEBAR */
 .sidebar-bg {
-  /* width: 50%; */
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  width: 50%;
+  /* height: 50%; */
+  max-width: 400px;
+  min-width: 200px;
+  border: 2px solid #94806A;
+  position: fixed;
   top: 65px;
   font-size: 22px;
   text-align: center;
@@ -183,9 +198,12 @@ form.search-form button:hover {
 }
 
 .sidebar-bg p {
-  margin: 20px;
-  padding: 15px;
+  margin:0px;
+  padding: 35px;
+  /* border: 1px solid #94806A; */
 }
+
+
 
 .sidebar-bg p:hover {
   cursor: pointer;

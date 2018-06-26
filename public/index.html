@@ -31,22 +31,27 @@
       </div>
 
       <div class="rectangle">
-        <form action="#" class="search-form" id="search-query-form">
-          <button type="submit" class="field side-align submit-login" id="login">Log In</button>
-          <button type="submit" class="field side-align submit-signup" id="signup">Sign Up</button>
-          <input type="text" placeholder="First Name" class="field hide-this" id="firstname">
-          <input type="text" placeholder="Last Name" class="field hide-this" id="lastname">
-          <input type="text" placeholder="Email Address" class="field" id="email">
-          <input type="text" placeholder="Password" class="field" id="password">
+        <button type="submit" class="field side-align login" id="login">Log In</button>
+        <button type="submit" class="field side-align signup" id="signup">Sign Up</button>
+        <form action="#" class="" id="signup-form" hidden>
+          <input type="text" placeholder="First Name" class="field hide-this" id="firstname" required>
+          <input type="text" placeholder="Last Name" class="field hide-this" id="lastname" required>
+          <input type="text" placeholder="Email Address" class="field" id="email" required>
+          <input type="text" placeholder="Password" class="field" id="password" required>
+          <button type="submit" class="field submit-button" id="sub">Submit</button>
+        </form>
+        <form action="#" class="" id="login-form">
+          <input type="text" placeholder="Email Address" class="field" id="email" required>
+          <input type="text" placeholder="Password" class="field" id="password" required>
           <button type="submit" class="field submit-button" id="sub">Submit</button>
         </form>
       </div>
 
     </main>
 
-    <section class="about-section">
+    <section class="about-section" id="about-section">
 
-      <p class="about-title">What is Day?</p>
+      <p class="about-title" >What is Day?</p>
       <p class="about-detail">Day is an interactive journal to memorialize your adventures and thoughts. Integrate videos, images, and maps.</p>
       <img class="img-sze post-icons" src ="/images/homepage-video.jpg"/>
       <img class="img-sze post-icons" src="/images/homepage-maps.png"/>
@@ -65,9 +70,10 @@
 
     </section>
 
-    <div class="sidebar-bg hide-this">
+    <div class="sidebar-top hidden"></div>
+    <div class="sidebar-bg hidden">
       <div>
-        <p>About</p>
+        <a href="#about-section"><p>About</p></a>
         <p>Coming Soon</p>
         <p>Log In</p>
         <p>Sign Up</p>
