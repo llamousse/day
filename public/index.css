@@ -167,6 +167,26 @@ form.search-form button:hover {
 .foot-nav {
   margin-top: 30px;
   height: 65px;
-  background-color: #4FA0B9;
-  /* background-color: #94806A; */
+  background-color: #94806A;
+}
+
+/* LOAD PAGE SIDEBAR */
+.sidebar-bg {
+  /* width: 50%; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 65px;
+  font-size: 22px;
+  text-align: center;
+  background-color: white;
+}
+
+.sidebar-bg p {
+  margin: 20px;
+  padding: 15px;
+}
+
+.sidebar-bg p:hover {
+  cursor: pointer;
 }
