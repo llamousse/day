@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Remember all the good times and plan adventures with the blog planner app Day!">
-    <title>Day</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-    <!-- add fonts here -->
-    <link href="https://fonts.googleapis.com/css?family=Coming+Soon" rel="stylesheet">
-    <link href="index.css" rel="stylesheet" type="text/css"/>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Remember all the good times and plan adventures with the blog planner app Day!">
+  <title>Day</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <!-- add fonts here -->
+  <link href="https://fonts.googleapis.com/css?family=Coming+Soon" rel="stylesheet">
+  <link href="index.css" rel="stylesheet" type="text/css"/>
+</head>
 
-  <body>
+<body>
 
-    <main role="main" aria-live="assertive">
+  <main role="main" aria-live="assertive" id= "main">
 
-      <div class="home-nav sidebar lines">
-        <a href="#" class="sidebar-menu">
-            <img src="/images/sidebar-icon.png"/>
-        </a>
-        <a href="#" class="day">Day</a>
-        <a href="#" class="logo">
-            <img src="/images/logo-icon.jpg"/>
-        </a>
-      </div>
+    <div class="home-nav sidebar lines">
+      <a href="#" class="sidebar-menu">
+        <img src="/images/sidebar-icon.png"/>
+      </a>
+      <a href="#" class="day">Day</a>
+      <a href="#" class="logo">
+        <img src="/images/logo-icon.jpg"/>
+      </a>
+    </div>
 
-      <div class="display-start">
-        <p>Day in the Life :</p>
-        <p>Share Your Story</p>
-      </div>
+    <div class="display-start">
+      <p>Day in the Life :</p>
+      <p>Share Your Story</p>
+    </div>
 
-      <div class="rectangle">
-        <button type="submit" class="field side-align login" id="login">Log In</button>
-        <button type="submit" class="field side-align signup" id="signup">Sign Up</button>
-        <form action="#" class="" id="signup-form" hidden>
-          <input type="text" placeholder="First Name" class="field hide-this" id="firstname" required>
-          <input type="text" placeholder="Last Name" class="field hide-this" id="lastname" required>
-          <input type="text" placeholder="Email Address" class="field" id="email" required>
-          <input type="text" placeholder="Password" class="field" id="password" required>
-          <button type="submit" class="field submit-button" id="sub">Submit</button>
-        </form>
-        <form action="#" class="" id="login-form">
-          <input type="text" placeholder="Email Address" class="field" id="email" required>
-          <input type="text" placeholder="Password" class="field" id="password" required>
-          <button type="submit" class="field submit-button" id="sub">Submit</button>
-        </form>
-      </div>
+    <div class="rectangle">
+      <button type="submit" class="field side-align login" id="login">Log In</button>
+      <button type="submit" class="field side-align signup" id="signup">Sign Up</button>
+      <form action="#" class="" id="signup-form" hidden>
+        <input type="text" placeholder="First Name" class="field hide-this" id="firstname" required>
+        <input type="text" placeholder="Last Name" class="field hide-this" id="lastname" required>
+        <input type="text" placeholder="Email Address" class="field" id="email" required>
+        <input type="text" placeholder="Password" class="field" id="password" required>
+        <button type="submit" class="field submit-button" id="sub">Submit</button>
+      </form>
+      <form action="#" class="" id="login-form">
+        <input type="text" placeholder="Email Address" class="field" id="email" required>
+        <input type="text" placeholder="Password" class="field" id="password" required>
+        <button type="submit" class="field submit-button" id="sub">Submit</button>
+      </form>
+    </div>
 
-    </main>
+  </main>
 
-    <section class="about-section" id="about-section">
+  <section class="about-section" id="about-section">
 
+    <div id="about" class="section">
       <p class="about-title" >What is Day?</p>
       <p class="about-detail">Day is an interactive journal to memorialize your adventures and thoughts. Integrate videos, images, and maps.</p>
       <img class="img-sze post-icons" src ="/images/homepage-video.jpg"/>
@@ -58,7 +59,9 @@
       <img class="img-sze post-icons" src="/images/homepage-image.png"/>
       <p class="about-title">Post Integration</p>
       <p class="about-detail">Add YouTube videos, Google Maps, and images to your posts.</p>
+    </div>
 
+    <div id="coming-soon" class="section">
       <p class="about-title">Coming Soon</p>
       <img class="ig-icon" src="/images/homepage-instagram.jpg"/>
       <p class="about-title">Instagram Post</p>
@@ -67,21 +70,21 @@
       <p class="about-title">Planner</p>
       <p class="about-detail">Plan future events and add your scheduled adventures to your journal.</p>
       <div class="foot-nav"></div>
-
-    </section>
-
-    <div class="sidebar-top hidden"></div>
-    <div class="sidebar-bg hidden">
-      <div>
-        <a href="#about-section"><p>About</p></a>
-        <p>Coming Soon</p>
-        <p>Log In</p>
-        <p>Sign Up</p>
-      </div>
     </div>
+  </section>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM8sqSYtpulgKyyRtOfIEJgw__RBzR3dk&libraries=places&callback=init" async defer></script> -->
-    <script src="index.js"></script>
-  </body>
+  <div class="sidebar-top hidden"></div>
+  <div class="sidebar-bg hidden">
+    <div>
+      <a class="sidebar-button" href="#about-section"><p>About</p></a>
+      <a class="sidebar-button" href="#coming-soon"><p>Coming Soon</p></a>
+      <a class="sidebar-button" id="sidebar-login" href="#main"><p>Log In</p></a>
+      <a class="sidebar-button" id="sidebar-signup" href="#main"><p>Sign Up</p></a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM8sqSYtpulgKyyRtOfIEJgw__RBzR3dk&libraries=places&callback=init" async defer></script> -->
+  <script src="index.js"></script>
+</body>
 </html>

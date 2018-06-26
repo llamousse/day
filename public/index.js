@@ -7,25 +7,34 @@ $(window).on("scroll", function(){
   }
 });
 
+function toggleForm(form1, form2){
+  $(`#${form1}`).css("background-color", "#B0E2F8");
+  $(`#${form2}`).css("background-color", "#ffffff");
+  $(`#${form1}-form`).show();
+  $(`#${form2}-form`).hide();
+}
 // CLICK ON LOG IN
 $('.rectangle').on('click', '.login', function(event) {
-  $('#login').css("background-color", "#B0E2F8");
-  $('#signup').css("background-color", "#ffffff");
-  $('#signup-form').hide();
-  $('#login-form').show();
+   toggleForm("login", "signup")
 });
-
 // CLICK ON SIGN UP
 $('.rectangle').on('click', '.signup', function(event) {
-  $('#signup').css("background-color", "#B0E2F8");
-  $('#login').css("background-color", "#ffffff");
-  $('#signup-form').show();
-  $('#login-form').hide();
+   toggleForm("signup", "login")
+});
+$('#sidebar-login').click(function(event) {
+   toggleForm("login", "signup")
+});
+$('#sidebar-signup').click(function(event) {
+   toggleForm("signup", "login")
 });
 
-
 $('.home-nav').on('click', '.sidebar-menu', function(event) {
-  event.preventDefault()
+  event.preventDefault();
   $('.sidebar-bg').toggleClass("hidden");
   $('.sidebar-top').toggleClass("hidden");
 });
+
+$(".sidebar-button").click(function(event){
+  $('.sidebar-bg').addClass("hidden");
+  $('.sidebar-top').addClass("hidden");
+})
