@@ -7,7 +7,8 @@
   <title>Day</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <!-- add fonts here -->
-  <link href="https://fonts.googleapis.com/css?family=Coming+Soon" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200|Open+Sans:300" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Coming+Soon" rel="stylesheet"> -->
   <link href="index.css" rel="stylesheet" type="text/css"/>
 </head>
 
@@ -34,8 +35,8 @@
       <button type="submit" class="field side-align login" id="login">Log In</button>
       <button type="submit" class="field side-align signup" id="signup">Sign Up</button>
       <form action="#" class="" id="signup-form" hidden>
-        <input type="text" placeholder="First Name" class="field hide-this" id="firstname" required>
-        <input type="text" placeholder="Last Name" class="field hide-this" id="lastname" required>
+        <input type="text" placeholder="First Name" class="field" id="firstname" required>
+        <input type="text" placeholder="Last Name" class="field" id="lastname" required>
         <input type="text" placeholder="Email Address" class="field" id="email" required>
         <input type="text" placeholder="Password" class="field" id="password" required>
         <button type="submit" class="field submit-button" id="sub">Submit</button>
@@ -58,10 +59,10 @@
       <img class="img-sze post-icons" src="/images/homepage-maps.png"/>
       <img class="img-sze post-icons" src="/images/homepage-image.png"/>
       <p class="about-title">Post Integration</p>
-      <p class="about-detail">Add YouTube videos, Google Maps, and images to your posts.</p>
+      <p class="about-detail" id="coming-soon">Add YouTube videos, Google Maps, and images to your posts.</p>
     </div>
 
-    <div id="coming-soon" class="section">
+    <div class="section">
       <p class="about-title">Coming Soon</p>
       <img class="ig-icon" src="/images/homepage-instagram.jpg"/>
       <p class="about-title">Instagram Post</p>
@@ -72,7 +73,11 @@
     </div>
   </section>
 
-  <div class="foot-nav"></div>
+  <div class="foot-nav hidden">
+    <p class="contact-footer">© 2018 Vicky Yue
+      <!-- <img class="img-footer contact-footer" src="/images/github.png"/> -->
+    </p>
+  </div>
 
   <div class="sidebar-top hidden"></div>
   <div class="sidebar-bg hidden">
@@ -82,6 +87,37 @@
       <a class="sidebar-button" id="sidebar-login" href="#main"><p>Log In</p></a>
       <a class="sidebar-button" id="sidebar-signup" href="#main"><p>Sign Up</p></a>
     </div>
+  </div>
+
+  <div class="bg-journal hidden">
+    <div class="journal">
+      <h1>How's Your Day Today?</h1>
+
+      <div class="post-rectangle">
+        <form action="#" class="journal-field" id="post-head">
+          <input type="text" placeholder="Title:" class="post-title" id="p-title">
+          <input type="text" placeholder="Date:" class="post-date" id="p-date" required>
+        </form>
+        <form action="#" class="journal-field" id="post-desc">
+          <input type="text" placeholder="Description:" class="post-desc" id="p-desc">
+        </form>
+      </div>
+
+      <div class="options">
+        <button type="submit" class="" id="yt">Video</button>
+        <button type="submit" class="" id="img">Image</button>
+        <button type="submit" class="" id="gm">Maps</button>
+        <button type="submit" class="" id="post-submit">Post</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-display hidden">
+    <h1>April 01, 2018</h1>
+  </div>
+
+  <div class="foot-nav2 hidden">
+    <p class="contact-footer">© 2018 Vicky Yue</p>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

@@ -5,7 +5,8 @@ html {
 }
 
 body {
-  font-family: 'Coming Soon', cursive;
+  /* font-family: 'Coming Soon', cursive; */
+  font-family: 'Open Sans', sans-serif;
   background: url("/images/homepage.jpg") no-repeat center;
   background-size: cover;
   width: 100%;
@@ -16,6 +17,7 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 /* LOAD PAGE - NAV BAR */
@@ -83,7 +85,7 @@ a {
   background: #94806A;
 }
 .section{
-    margin: 100px 0;
+  margin: 100px 0;
 }
 .field {
   width: 100%;
@@ -128,10 +130,14 @@ a {
   text-align: center;
 }
 
-form.search-form button:hover {
-	/* background-color: #82CEEF; */
+form #sub:hover {
   background-color: #B0E2F8;
   cursor: pointer;
+  outline: none;
+}
+
+.rectangle #login:focus, #signup:focus, input:focus {
+  outline: none;
 }
 
 /* LOAD PAGE - ABOUT SECTION */
@@ -175,6 +181,20 @@ form.search-form button:hover {
   background-color: #94806A;
 }
 
+.foot-nav2 {
+  margin-top: 30px;
+  height: 65px;
+  background-color: #94806A;
+}
+.contact-footer {
+  text-align: center;
+  padding: 20px;
+}
+
+.img-footer {
+  width: 5%;
+}
+
 .sidebar-top{
   position: fixed;
   top: 0;
@@ -188,7 +208,6 @@ form.search-form button:hover {
 /* LOAD PAGE SIDEBAR */
 .sidebar-bg {
   width: 50%;
-  /* height: 50%; */
   max-width: 400px;
   min-width: 200px;
   border: 2px solid #94806A;
@@ -202,11 +221,91 @@ form.search-form button:hover {
 .sidebar-bg p {
   margin:0px;
   padding: 35px;
-  /* border: 1px solid #94806A; */
 }
-
-
 
 .sidebar-bg p:hover {
   cursor: pointer;
+}
+
+/* JOURNAL PAGE */
+
+.bg-journal {
+  height: 100%;
+  width: 100%;
+  background-color: #94806A;
+}
+
+.journal {
+  color: white;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  /* margin-top: 80px; */
+  padding: 70px;
+  /* background-color: #94806A; */
+}
+
+.journal h1 {
+  font-size: 30px;
+}
+
+.journal-field {
+  margin-top: 15px;
+  border: none;
+  /* width: 100%; */
+  /* padding 0 8px; */
+}
+
+.post-rectangle {
+  width: 100%;
+}
+
+.post-desc {
+  height: 50px;
+  width: 70%;
+  /* max-width: 565px; */
+}
+
+.post-title {
+  margin-top: 5px;
+  margin-right: 5px;
+  /* width: 35%; */
+  width: 32%;
+  /* max-width: 262px; */
+  padding: 5px 5px 5px 10px;
+}
+
+.post-date {
+  margin-top: 5px;
+  width: 32%;
+  /* max-width: 262px; */
+  padding: 5px 5px 5px 10px;
+}
+
+.options {
+  /* margin-top: 15px; */
+  border: none;
+}
+
+#yt, #img, #gm, #post-submit {
+  margin-right: 15px;
+  margin-top: 15px;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.options #yt:hover, #img:hover, #gm:hover {
+  background-color: #B0E2F8;
+  border: none;
+}
+
+.options #post-submit:hover {
+  background-color: #CA4F3E;
+  border: none;
+}
+
+/* POSTS */
+
+.post-display {
+  margin: 40px;
 }

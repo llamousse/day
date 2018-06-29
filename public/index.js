@@ -37,4 +37,15 @@ $('.home-nav').on('click', '.sidebar-menu', function(event) {
 $(".sidebar-button").click(function(event){
   $('.sidebar-bg').addClass("hidden");
   $('.sidebar-top').addClass("hidden");
-})
+});
+
+// SIGN IN
+$('.submit-button').click(function(event) {
+  $('.display-start').addClass("hidden");
+  $('.rectangle').addClass("hidden");
+  $('.about-section').addClass("hidden");
+  $('.bg-journal').removeClass("hidden");
+  $('.post-display').removeClass("hidden");
+  $('.foot-nav').addClass("hidden");
+  $('.foot-nav2').removeClass("hidden");
+});
