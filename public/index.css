@@ -230,7 +230,7 @@ form #sub:hover {
 /* JOURNAL PAGE */
 
 .bg-journal {
-  height: 100%;
+
   width: 100%;
   background-color: #94806A;
 }
@@ -268,30 +268,41 @@ form #sub:hover {
 
 .post-title {
   margin-top: 5px;
-  margin-right: 5px;
-  /* width: 35%; */
-  width: 32%;
+  margin-right: 2%;
+  width: 34%;
+  /* width: 32%; */
   /* max-width: 262px; */
   padding: 5px 5px 5px 10px;
+  box-sizing: border-box;
 }
 
 .post-date {
   margin-top: 5px;
-  width: 32%;
+  width: 34%;
   /* max-width: 262px; */
   padding: 5px 5px 5px 10px;
+  box-sizing: border-box;
 }
 
 .options {
+  width:70%;
   /* margin-top: 15px; */
   border: none;
+  margin: 0 auto;
 }
 
-#yt, #img, #gm, #post-submit {
-  margin-right: 15px;
-  margin-top: 15px;
+.post-option {
+  margin: 30px 8px 0;
   border-radius: 5px;
   padding: 8px;
+}
+
+#yt{
+  margin-left: 0;
+}
+
+#post{
+  margin-right: 0;
 }
 
 .options #yt:hover, #img:hover, #gm:hover {
@@ -308,4 +319,20 @@ form #sub:hover {
 
 .post-display {
   margin: 40px;
+  background-color: white;
+}
+
+
+.type{
+  background-color: white;
+  width: 70%;
+  height:25px;
+  margin:50px auto;
+}
+
+.post-option-type{
+  width: 25%;
+  border:1px solid black;
+  box-sizing: border-box;
+  height:100%;
 }
