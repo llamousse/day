@@ -230,7 +230,7 @@ form #sub:hover {
 /* JOURNAL PAGE */
 
 .bg-journal {
-
+  height: auto;
   width: 100%;
   background-color: #94806A;
 }
@@ -240,9 +240,7 @@ form #sub:hover {
   text-align: center;
   display: block;
   margin: 0 auto;
-  /* margin-top: 80px; */
   padding: 70px;
-  /* background-color: #94806A; */
 }
 
 .journal h1 {
@@ -250,10 +248,9 @@ form #sub:hover {
 }
 
 .journal-field {
-  margin-top: 15px;
+  /* margin-top: 15px; */
+  margin-top: 25px;
   border: none;
-  /* width: 100%; */
-  /* padding 0 8px; */
 }
 
 .post-rectangle {
@@ -261,17 +258,14 @@ form #sub:hover {
 }
 
 .post-desc {
-  height: 50px;
+  height: 100px;
   width: 70%;
-  /* max-width: 565px; */
 }
 
 .post-title {
   margin-top: 5px;
   margin-right: 2%;
   width: 34%;
-  /* width: 32%; */
-  /* max-width: 262px; */
   padding: 5px 5px 5px 10px;
   box-sizing: border-box;
 }
@@ -279,60 +273,47 @@ form #sub:hover {
 .post-date {
   margin-top: 5px;
   width: 34%;
-  /* max-width: 262px; */
   padding: 5px 5px 5px 10px;
   box-sizing: border-box;
 }
 
-.options {
-  width:70%;
-  /* margin-top: 15px; */
-  border: none;
-  margin: 0 auto;
-}
-
-.post-option {
-  margin: 30px 8px 0;
-  border-radius: 5px;
-  padding: 8px;
-}
-
-#yt{
-  margin-left: 0;
-}
-
-#post{
-  margin-right: 0;
-}
-
-.options #yt:hover, #img:hover, #gm:hover {
-  background-color: #B0E2F8;
-  border: none;
-}
-
-.options #post-submit:hover {
-  background-color: #CA4F3E;
-  border: none;
-}
-
-/* POSTS */
-
-.post-display {
-  margin: 40px;
-  background-color: white;
-}
-
-
 .type{
-  background-color: white;
+  color: black;
   width: 70%;
-  height:25px;
-  margin:50px auto;
+  height: 25px;
+  margin: 25px auto;
+  /* background-color: white; */
 }
 
 .post-option-type{
   width: 25%;
-  border:1px solid black;
   box-sizing: border-box;
-  height:100%;
+  height: 100%;
+  float: left;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid slategrey;
+}
+
+.type #yt:hover, #img:hover, #gm:hover {
+  background-color: #B0E2F8;
+  border: none;
+}
+
+.type #post:hover {
+  background-color: #CA4F3E;
+  border: none;
+}
+
+/* POST */
+
+.post-display {
+  /* margin: 40px; */
+  background-color: white;
+  height: 100%;
+}
+
+.post-display h1 {
+  margin: 0;
+  padding: 20px;
 }
