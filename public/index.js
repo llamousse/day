@@ -13,11 +13,80 @@ function toggleForm(form1, form2){
   $(`#${form1}-form`).show();
   $(`#${form2}-form`).hide();
 }
-// CLICK ON LOG IN
+
+function togglePostForm(opt1, opt2, opt3, opt4) {
+  $(`#${opt1}`).css("background-color", "#B0E2F8");
+  $(`#${opt2}`).css("background-color", "#ffffff");
+  $(`#${opt3}`).css("background-color", "#ffffff");
+  $(`#${opt4}`).css("background-color", "#ffffff");
+}
+
+function sideBarMenu() {
+  $('.sidebar-bg').toggleClass("hidden");
+  $('.sidebar-top').toggleClass("hidden");
+
+  $(".sidebar-button").click(function(event){
+    $('.sidebar-bg').addClass("hidden");
+    $('.sidebar-top').addClass("hidden");
+  });
+}
+
+function loggedIn() {
+  $('.sidebar-bg').addClass("hidden");
+  $('.display-start').addClass("hidden");
+  $('.rectangle').addClass("hidden");
+  $('.about-section').addClass("hidden");
+  $('.bg-journal').removeClass("hidden");
+  $('.post-display').removeClass("hidden");
+  $('.foot-nav').addClass("hidden");
+  $('.foot-nav2').removeClass("hidden");
+
+  $('.home-nav').on('click', '.sidebar-menu', function(event) {
+    event.preventDefault();
+    $('.sidebar-button').hide();
+    $('.jsidebar-button').show();
+  });
+
+  $('.jsidebar-button').click(function(event){
+    $('.sidebar-bg').addClass("hidden");
+    $('.sidebar-top').addClass("hidden");
+  });
+}
+
+function loggedOut() {
+  $('.sidebar-bg').toggleClass("hidden");
+  $('.display-start').removeClass("hidden");
+  $('.rectangle').removeClass("hidden");
+  $('.about-section').removeClass("hidden");
+  $('.bg-journal').addClass("hidden");
+  $('.post-display').addClass("hidden");
+  $('.foot-nav').removeClass("hidden");
+  $('.foot-nav2').addClass("hidden");
+
+  $('.home-nav').on('click', '.sidebar-menu', function(event) {
+    event.preventDefault();
+    $('.sidebar-button').show();
+    $('.jsidebar-button').hide();
+  });
+
+  $('.jsidebar-button').click(function(event){
+    $('.sidebar-bg').addClass("hidden");
+    $('.sidebar-top').addClass("hidden");
+  });
+
+  $('.sidebar-bg').toggleClass("hidden");
+  $('.jsidebar-button').addClass("hidden");
+  $('.sidebar-button').toggleClass("hidden");
+}
+
+$('.home-nav').on('click', '.sidebar-menu', function(event) {
+  event.preventDefault();
+  sideBarMenu();
+});
+
 $('.rectangle').on('click', '.login', function(event) {
    toggleForm("login", "signup")
 });
-// CLICK ON SIGN UP
 $('.rectangle').on('click', '.signup', function(event) {
    toggleForm("signup", "login")
 });
@@ -28,24 +97,22 @@ $('#sidebar-signup').click(function(event) {
    toggleForm("signup", "login")
 });
 
-$('.home-nav').on('click', '.sidebar-menu', function(event) {
-  event.preventDefault();
-  $('.sidebar-bg').toggleClass("hidden");
-  $('.sidebar-top').toggleClass("hidden");
-});
-
-$(".sidebar-button").click(function(event){
-  $('.sidebar-bg').addClass("hidden");
-  $('.sidebar-top').addClass("hidden");
-});
-
-// SIGN IN
 $('.submit-button').click(function(event) {
-  $('.display-start').addClass("hidden");
-  $('.rectangle').addClass("hidden");
-  $('.about-section').addClass("hidden");
-  $('.bg-journal').removeClass("hidden");
-  $('.post-display').removeClass("hidden");
-  $('.foot-nav').addClass("hidden");
-  $('.foot-nav2').removeClass("hidden");
+  loggedIn();
+});
+$('#logout').click(function(event) {
+  loggedOut();
+});
+
+$('#yt').click(function(event) {
+  togglePostForm("yt", "img", "gm", "post")
+});
+$('#img').click(function(event) {
+  togglePostForm("img", "yt", "gm", "post")
+});
+$('#gm').click(function(event) {
+  togglePostForm("gm", "img", "yt", "post")
+});
+$('#post').click(function(event) {
+  togglePostForm("post", "img", "gm", "yt")
 });
