@@ -5,7 +5,6 @@ html {
 }
 
 body {
-  /* font-family: 'Coming Soon', cursive; */
   font-family: 'Open Sans', sans-serif;
   background: url("/images/homepage.jpg") no-repeat center;
   background-size: cover;
@@ -296,15 +295,15 @@ form #sub:hover {
   border: 1px solid slategrey;
 }
 
-.type #yt:hover, #img:hover, #gm:hover {
+.type #yt:hover, #img:hover, #gm:hover, #post:hover {
   background-color: #B0E2F8;
   border: none;
 }
 
-.type #post:hover {
+/* .type #post:hover {
   background-color: #CA4F3E;
   border: none;
-}
+} */
 
 /* POST */
 

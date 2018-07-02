@@ -1,5 +1,5 @@
-$(window).on("scroll", function(){
-  if($(window).scrollTop() > 350){
+$(window).on("scroll", function() {
+  if($(window).scrollTop() > 350) {
     $(".home-nav").css("background-color", "#94806A");
   }
   else {
@@ -7,7 +7,7 @@ $(window).on("scroll", function(){
   }
 });
 
-function toggleForm(form1, form2){
+function toggleForm(form1, form2) {
   $(`#${form1}`).css("background-color", "#B0E2F8");
   $(`#${form2}`).css("background-color", "#ffffff");
   $(`#${form1}-form`).show();
@@ -78,6 +78,8 @@ function loggedOut() {
   $('.jsidebar-button').addClass("hidden");
   $('.sidebar-button').toggleClass("hidden");
 }
+
+//////////////////////////////////////////////////////////////
 
 $('.home-nav').on('click', '.sidebar-menu', function(event) {
   event.preventDefault();
