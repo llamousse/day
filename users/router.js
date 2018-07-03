@@ -87,7 +87,7 @@ router.post('/', jsonParser, (req, res) => {
   }
 
   let {email, password, firstName = '', lastName = ''} = req.body;
-  // Username and password come in pre-trimmed, otherwise we throw an error
+  // Email and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
@@ -119,6 +119,7 @@ router.post('/', jsonParser, (req, res) => {
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
+      console.log(err)
       // Forward validation errors on to the client, otherwise give a 500
       // error because something unexpected has happened
       if (err.reason === 'ValidationError') {

@@ -42,11 +42,11 @@ describe('Auth routes', function () {
     return User.remove({});
   });
 
-  describe('/auth/login', function () {
+  describe('/api/auth/login', function () {
     it('Should not pass if nothing is filled out', function () {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
         )
@@ -62,7 +62,7 @@ describe('Auth routes', function () {
     it('Should not pass if email is not completed', function() {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({ email: null, password })
         .then(function(res){
           expect(res).to.have.status(400);
@@ -71,7 +71,7 @@ describe('Auth routes', function () {
     it('Should not pass if password is not completed', function() {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({ email, password: null })
         .then(function(res){
           expect(res).to.have.status(400);
@@ -80,7 +80,7 @@ describe('Auth routes', function () {
     it('Should not pass if the email starts with a space', function() {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({ email: ' ', password })
         .then(function(res) {
           expect(res).to.have.status(500);
@@ -89,7 +89,7 @@ describe('Auth routes', function () {
     it('Should not pass if email is not a non-string', function() {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({ email: 123, password })
         .then(function(res) {
           expect(res).to.have.status(500);
@@ -99,7 +99,7 @@ describe('Auth routes', function () {
     it('Should not pass with incorrect email', function () {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({ email: 'wrongEmail', password })
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
@@ -116,7 +116,7 @@ describe('Auth routes', function () {
     it('Should not pass with incorrect password', function () {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({ email, password: 'wrongPassword' })
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
@@ -133,7 +133,7 @@ describe('Auth routes', function () {
     it('Should return a valid auth token', function () {
       return chai
         .request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({ email, password })
         .then(res => {
           expect(res).to.have.status(200);
@@ -152,11 +152,11 @@ describe('Auth routes', function () {
     });
   });
 
-  describe('/auth/refresh', function () {
+  describe('/api/auth/refresh', function () {
     it('Should not pass with no credentials', function () {
       return chai
         .request(app)
-        .post('/auth/refresh')
+        .post('/api/auth/refresh')
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
         )
@@ -185,7 +185,7 @@ describe('Auth routes', function () {
 
       return chai
         .request(app)
-        .post('/auth/refresh')
+        .post('/api/auth/refresh')
         .set('Authorization', `Bearer ${token}`)
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
@@ -218,7 +218,7 @@ describe('Auth routes', function () {
 
       return chai
         .request(app)
-        .post('/auth/refresh')
+        .post('/api/auth/refresh')
         .set('authorization', `Bearer ${token}`)
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
@@ -252,7 +252,7 @@ describe('Auth routes', function () {
 
       return chai
         .request(app)
-        .post('/auth/refresh')
+        .post('/api/auth/refresh')
         .set('authorization', `Bearer ${token}`)
         .then(res => {
           expect(res).to.have.status(200);
