@@ -10,7 +10,11 @@ const { JWT_SECRET } = require('../config');
 
 const mongoose = require('mongoose');
 
-const localStrategy = new LocalStrategy((email, password, callback) => {
+const localStrategy = new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+}, (email, password, callback) => {
+  console.log("ASDASDASDASDASD");
   let user;
   User.findOne({ email: email })
     .then(_user => {
