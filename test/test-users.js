@@ -12,12 +12,12 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('/user', function () {
-  const email = 'user';
+describe('/api/user', function () {
+  const email = 'user@test.com';
   const password = 'pass';
   const firstName = 'Example';
   const lastName = 'Name';
-  const emailB = 'userB';
+  const emailB = 'userB@test.com';
   const passwordB = 'passB';
   const firstNameB = 'ExampleB';
   const lastNameB = 'NameB';
@@ -36,12 +36,12 @@ describe('/user', function () {
     return User.remove({});
   });
 
-  describe('/users', function () {
+  describe('/api/users', function () {
     describe('POST', function () {
       it('Should reject users with missing email', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             password,
             firstName,
@@ -65,7 +65,7 @@ describe('/user', function () {
       it('Should reject users with missing password', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             firstName,
@@ -89,7 +89,7 @@ describe('/user', function () {
       it('Should reject users with non-string email', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email: 1234,
             password,
@@ -116,7 +116,7 @@ describe('/user', function () {
       it('Should reject users with non-string password', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password: 1234,
@@ -143,7 +143,7 @@ describe('/user', function () {
       it('Should reject users with non-string first name', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password,
@@ -170,7 +170,7 @@ describe('/user', function () {
       it('Should reject users with non-string last name', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password,
@@ -197,7 +197,7 @@ describe('/user', function () {
       it('Should reject users with non-trimmed email', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email: ` ${email} `,
             password,
@@ -224,7 +224,7 @@ describe('/user', function () {
       it('Should reject users with non-trimmed password', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password: ` ${password} `,
@@ -251,7 +251,7 @@ describe('/user', function () {
       it('Should reject users with empty email', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email: '',
             password,
@@ -278,7 +278,7 @@ describe('/user', function () {
       it('Should reject users with password less than ten characters', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password: '123456789',
@@ -305,7 +305,7 @@ describe('/user', function () {
       it('Should reject users with password greater than 72 characters', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password: new Array(73).fill('a').join(''),
@@ -339,7 +339,7 @@ describe('/user', function () {
         })
           .then(() =>
             // Try to create a second user with the same email
-            chai.request(app).post('/users').send({
+            chai.request(app).post('/api/users').send({
               email,
               password,
               firstName,
@@ -366,7 +366,7 @@ describe('/user', function () {
       it('Should create a new user', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password,
@@ -401,7 +401,7 @@ describe('/user', function () {
       it('Should trim firstName and lastName', function () {
         return chai
           .request(app)
-          .post('/users')
+          .post('/api/users')
           .send({
             email,
             password,
@@ -427,48 +427,6 @@ describe('/user', function () {
             expect(user).to.not.be.null;
             expect(user.firstName).to.equal(firstName);
             expect(user.lastName).to.equal(lastName);
-          });
-      });
-    });
-
-    describe('GET', function () {
-      it('Should return an empty array initially', function () {
-        return chai.request(app).get('/users').then(res => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.length(0);
-        });
-      });
-      it('Should return an array of users', function () {
-        return User.create(
-          {
-            email,
-            password,
-            firstName,
-            lastName
-          },
-          {
-            email: emailB,
-            password: passwordB,
-            firstName: firstNameB,
-            lastName: lastNameB
-          }
-        )
-          .then(() => chai.request(app).get('/users'))
-          .then(res => {
-            expect(res).to.have.status(200);
-            expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(2);
-            expect(res.body[0]).to.deep.equal({
-              email,
-              firstName,
-              lastName
-            });
-            expect(res.body[1]).to.deep.equal({
-              email: emailB,
-              firstName: firstNameB,
-              lastName: lastNameB
-            });
           });
       });
     });

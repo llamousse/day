@@ -13,7 +13,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Protected endpoint', function () {
-  const email = 'user';
+  const email = 'user@test.com';
   const password = 'pass';
   const firstName = 'Example';
   const lastName = 'Name';

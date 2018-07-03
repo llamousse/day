@@ -128,48 +128,4 @@ router.post('/', jsonParser, (req, res) => {
     });
 });
 
-// Never expose all your users like below in a prod application
-// we're just doing this so we have a quick way to see
-// if we're creating users. keep in mind, you can also
-// verify this in the Mongo shell.
-router.get('/', (req, res) => {
-  return User.find()
-    .then(users => res.json(users.map(user => user.serialize())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
-});
-
-// const jwtAuth = passport.authenticate('jwt', {session: false});
-
-// checks to see if user is already logged in
-
-// router.get('/logged', jwtAuth, (req, res) => {
-// 	const token = req.headers.authorization.split(' ')[1];
-// 	const tokenPayload = jwt.verify(token, JWT_SECRET);
-// 	const _email = tokenPayload.user.email;
-//
-// 	User
-// 		.findOne({email: _email})
-// 		.then(user => {
-// 			return res.send(user.accountBasics());
-// 		})
-// 		.catch(err => {
-// 			console.log(err);
-// 			return res.status(500).json({message: 'Internal Server Error'});
-// 		});
-// });
-//
-// router.delete('/:id', jwtAuth, (req, res) => {
-// 	User
-// 		.findByIdAndRemove(req.params.id)
-// 		.then(() => {
-// 			console.log('Profile deleted')
-// 			res.status(204).end()
-// 		})
-// 		.catch(err => {
-// 			console.log(err);
-// 			res.status(500).json({message: 'Internal Server Error'});
-// 		});
-// });
-
-
 module.exports = {router};
