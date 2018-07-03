@@ -5,12 +5,15 @@ const bodyParser = require('body-parser');
 const {User} = require('./models');
 
 const router = express.Router();
-
 const jsonParser = bodyParser.json();
+
+const jwt = require("jsonwebtoken");
+const {JWT_SECRET} = require('../config');
+const passport = require('passport');
 
 // Post to register a new user
 router.post('/', jsonParser, (req, res) => {
-  const requiredFields = ['username', 'password'];
+  const requiredFields = ['email', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
@@ -22,7 +25,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  const stringFields = ['username', 'password', 'firstName', 'lastName'];
+  const stringFields = ['email', 'password', 'firstName', 'lastName'];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -36,15 +39,8 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  // If the username and password aren't trimmed we give an error.  Users might
-  // expect that these will work without trimming (i.e. they want the password
-  // "foobar ", including the space at the end).  We need to reject such values
-  // explicitly so the users know what's happening, rather than silently
-  // trimming them and expecting the user to understand.
-  // We'll silently trim the other fields, because they aren't credentials used
-  // to log in, so it's less of a problem.
-  const explicityTrimmedFields = ['username', 'password'];
-  const nonTrimmedField = explicityTrimmedFields.find(
+  const trimmedFields = ['email', 'password'];
+  const nonTrimmedField = trimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
 
@@ -58,56 +54,54 @@ router.post('/', jsonParser, (req, res) => {
   }
 
   const sizedFields = {
-    username: {
+    email: {
       min: 1
     },
     password: {
       min: 10,
-      // bcrypt truncates after 72 characters, so let's not give the illusion
-      // of security by storing extra (unused) info
       max: 72
     }
   };
-  const tooSmallField = Object.keys(sizedFields).find(
+  const tooSmall = Object.keys(sizedFields).find(
     field =>
       'min' in sizedFields[field] &&
             req.body[field].trim().length < sizedFields[field].min
   );
-  const tooLargeField = Object.keys(sizedFields).find(
+  const tooLarge = Object.keys(sizedFields).find(
     field =>
       'max' in sizedFields[field] &&
             req.body[field].trim().length > sizedFields[field].max
   );
 
-  if (tooSmallField || tooLargeField) {
+  if (tooSmall || tooLarge) {
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
-      message: tooSmallField
-        ? `Must be at least ${sizedFields[tooSmallField]
+      message: tooSmall
+        ? `Must be at least ${sizedFields[tooSmall]
           .min} characters long`
-        : `Must be at most ${sizedFields[tooLargeField]
+        : `Must be at most ${sizedFields[tooLarge]
           .max} characters long`,
-      location: tooSmallField || tooLargeField
+      location: tooSmall || tooLarge
     });
   }
 
-  let {username, password, firstName = '', lastName = ''} = req.body;
+  let {email, password, firstName = '', lastName = ''} = req.body;
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
 
-  return User.find({username})
+  return User.find({email})
     .count()
     .then(count => {
       if (count > 0) {
-        // There is an existing user with the same username
+        // There is an existing user with the same email
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
-          message: 'Username already taken',
-          location: 'username'
+          message: 'Email already taken',
+          location: 'email'
         });
       }
       // If there is no existing user, hash the password
@@ -115,7 +109,7 @@ router.post('/', jsonParser, (req, res) => {
     })
     .then(hash => {
       return User.create({
-        username,
+        email,
         password: hash,
         firstName,
         lastName
@@ -143,5 +137,39 @@ router.get('/', (req, res) => {
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
+
+// const jwtAuth = passport.authenticate('jwt', {session: false});
+
+// checks to see if user is already logged in
+
+// router.get('/logged', jwtAuth, (req, res) => {
+// 	const token = req.headers.authorization.split(' ')[1];
+// 	const tokenPayload = jwt.verify(token, JWT_SECRET);
+// 	const _email = tokenPayload.user.email;
+//
+// 	User
+// 		.findOne({email: _email})
+// 		.then(user => {
+// 			return res.send(user.accountBasics());
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			return res.status(500).json({message: 'Internal Server Error'});
+// 		});
+// });
+//
+// router.delete('/:id', jwtAuth, (req, res) => {
+// 	User
+// 		.findByIdAndRemove(req.params.id)
+// 		.then(() => {
+// 			console.log('Profile deleted')
+// 			res.status(204).end()
+// 		})
+// 		.catch(err => {
+// 			console.log(err);
+// 			res.status(500).json({message: 'Internal Server Error'});
+// 		});
+// });
+
 
 module.exports = {router};

@@ -7,25 +7,24 @@ const uuid = require('uuid');
 mongoose.Promise = global.Promise;
 
 const PostSchema = mongoose.Schema({
-  // username: {
-  //   type: String,
-  //   required: true,
-  //   unique: true
-  // },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
   password: {
     type: String,
     required: true
   },
   firstName: {type: String, default: ''},
   lastName: {type: String, default: ''},
-  emailAddress: {type: String, default: ''}
 });
 
 PostSchema.methods.serialize = function() {
   return {
     firstName: this.firstName || '',
     lastName: this.lastName || '',
-    emailAddress: this.emailAddress || ''
+    email: this.email || ''
   };
 };
 

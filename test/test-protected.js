@@ -10,16 +10,13 @@ const { JWT_SECRET, TEST_DATABASE_URL } = require('../config');
 
 const expect = chai.expect;
 
-// This let's us make HTTP requests
-// in our tests.
-// see: https://github.com/chaijs/chai-http
 chai.use(chaiHttp);
 
 describe('Protected endpoint', function () {
-  const username = 'exampleUser';
-  const password = 'examplePass';
+  const email = 'user';
+  const password = 'pass';
   const firstName = 'Example';
-  const lastName = 'User';
+  const lastName = 'Name';
 
   before(function () {
     return runServer(TEST_DATABASE_URL);
@@ -32,7 +29,7 @@ describe('Protected endpoint', function () {
   beforeEach(function () {
     return User.hashPassword(password).then(password =>
       User.create({
-        username,
+        email,
         password,
         firstName,
         lastName
@@ -65,7 +62,7 @@ describe('Protected endpoint', function () {
     it('Should reject requests with an invalid token', function () {
       const token = jwt.sign(
         {
-          username,
+          email,
           firstName,
           lastName
         },
@@ -96,7 +93,7 @@ describe('Protected endpoint', function () {
       const token = jwt.sign(
         {
           user: {
-            username,
+            email,
             firstName,
             lastName
           },
@@ -105,7 +102,7 @@ describe('Protected endpoint', function () {
         JWT_SECRET,
         {
           algorithm: 'HS256',
-          subject: username
+          subject: email
         }
       );
 
@@ -129,7 +126,7 @@ describe('Protected endpoint', function () {
       const token = jwt.sign(
         {
           user: {
-            username,
+            email,
             firstName,
             lastName
           }
@@ -137,7 +134,7 @@ describe('Protected endpoint', function () {
         JWT_SECRET,
         {
           algorithm: 'HS256',
-          subject: username,
+          subject: email,
           expiresIn: '7d'
         }
       );
