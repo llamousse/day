@@ -66,6 +66,12 @@ describe("Auth routes", function() {
           console.log("ASDASD");
           console.log(res);
           expect(res).to.have.status(400);
+        })
+        .catch(function(err) {
+          const res = err.response;
+
+          res.status.should.equal(400);
+          res.should.have.status(404);
         });
     });
     it("Should not pass if password is not completed", function() {
