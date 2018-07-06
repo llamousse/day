@@ -1,32 +1,32 @@
-'use strict';
+"use strict";
 
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const jwt = require('jsonwebtoken');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const jwt = require("jsonwebtoken");
 
-const { app, runServer, closeServer } = require('../server');
-const { User } = require('../users');
-const { JWT_SECRET, TEST_DATABASE_URL } = require('../config');
+const { app, runServer, closeServer } = require("../server");
+const { User } = require("../users");
+const { JWT_SECRET, TEST_DATABASE_URL } = require("../config");
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Protected endpoint', function () {
-  const email = 'user@test.com';
-  const password = 'pass';
-  const firstName = 'Example';
-  const lastName = 'Name';
+describe("Protected endpoint", function() {
+  const email = "user@test.com";
+  const password = "pass12312312";
+  const firstName = "Example";
+  const lastName = "Name";
 
-  before(function () {
+  before(function() {
     return runServer(TEST_DATABASE_URL);
   });
 
-  after(function () {
+  after(function() {
     return closeServer();
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     return User.hashPassword(password).then(password =>
       User.create({
         email,
@@ -37,18 +37,16 @@ describe('Protected endpoint', function () {
     );
   });
 
-  afterEach(function () {
+  afterEach(function() {
     return User.remove({});
   });
 
-  describe('/api/protected', function () {
-    it('Should reject requests with no credentials', function () {
+  describe("/api/protected", function() {
+    it("Should reject requests with no credentials", function() {
       return chai
         .request(app)
-        .get('/api/protected')
-        .then(() =>
-          expect.fail(null, null, 'Request should not succeed')
-        )
+        .get("/api/protected")
+        .then(() => expect.fail(null, null, "Request should not succeed"))
         .catch(err => {
           if (err instanceof chai.AssertionError) {
             throw err;
@@ -59,27 +57,25 @@ describe('Protected endpoint', function () {
         });
     });
 
-    it('Should reject requests with an invalid token', function () {
+    it("Should reject requests with an invalid token", function() {
       const token = jwt.sign(
         {
           email,
           firstName,
           lastName
         },
-        'wrongSecret',
+        "wrongSecret",
         {
-          algorithm: 'HS256',
-          expiresIn: '7d'
+          algorithm: "HS256",
+          expiresIn: "7d"
         }
       );
 
       return chai
         .request(app)
-        .get('/api/protected')
-        .set('Authorization', `Bearer ${token}`)
-        .then(() =>
-          expect.fail(null, null, 'Request should not succeed')
-        )
+        .get("/api/protected")
+        .set("Authorization", `Bearer ${token}`)
+        .then(() => expect.fail(null, null, "Request should not succeed"))
         .catch(err => {
           if (err instanceof chai.AssertionError) {
             throw err;
@@ -89,7 +85,7 @@ describe('Protected endpoint', function () {
           expect(res).to.have.status(401);
         });
     });
-    it('Should reject requests with an expired token', function () {
+    it("Should reject requests with an expired token", function() {
       const token = jwt.sign(
         {
           user: {
@@ -101,18 +97,16 @@ describe('Protected endpoint', function () {
         },
         JWT_SECRET,
         {
-          algorithm: 'HS256',
+          algorithm: "HS256",
           subject: email
         }
       );
 
       return chai
         .request(app)
-        .get('/api/protected')
-        .set('authorization', `Bearer ${token}`)
-        .then(() =>
-          expect.fail(null, null, 'Request should not succeed')
-        )
+        .get("/api/protected")
+        .set("authorization", `Bearer ${token}`)
+        .then(() => expect.fail(null, null, "Request should not succeed"))
         .catch(err => {
           if (err instanceof chai.AssertionError) {
             throw err;
@@ -122,7 +116,7 @@ describe('Protected endpoint', function () {
           expect(res).to.have.status(401);
         });
     });
-    it('Should send protected data', function () {
+    it("Should send protected data", function() {
       const token = jwt.sign(
         {
           user: {
@@ -133,20 +127,20 @@ describe('Protected endpoint', function () {
         },
         JWT_SECRET,
         {
-          algorithm: 'HS256',
+          algorithm: "HS256",
           subject: email,
-          expiresIn: '7d'
+          expiresIn: "7d"
         }
       );
 
       return chai
         .request(app)
-        .get('/api/protected')
-        .set('authorization', `Bearer ${token}`)
+        .get("/api/protected")
+        .set("authorization", `Bearer ${token}`)
         .then(res => {
           expect(res).to.have.status(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.equal('rosebud');
+          expect(res.body).to.be.an("object");
+          expect(res.body.data).to.equal("rosebud");
         });
     });
   });
