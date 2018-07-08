@@ -40,6 +40,8 @@ function loggedIn() {
   $('.post-display').removeClass("hidden");
   $('.foot-nav').addClass("hidden");
   $('.foot-nav2').removeClass("hidden");
+  $('#text').css("background-color", "#B0E2F8");
+  $('.post-desc').removeClass("hidden");
 
   $('.home-nav').on('click', '.sidebar-menu', function(event) {
     event.preventDefault();
@@ -87,16 +89,16 @@ $('.home-nav').on('click', '.sidebar-menu', function(event) {
 });
 
 $('.rectangle').on('click', '.login', function(event) {
-   toggleForm("login", "signup")
+   toggleForm("login", "signup");
 });
 $('.rectangle').on('click', '.signup', function(event) {
-   toggleForm("signup", "login")
+   toggleForm("signup", "login");
 });
 $('#sidebar-login').click(function(event) {
-   toggleForm("login", "signup")
+   toggleForm("login", "signup");
 });
 $('#sidebar-signup').click(function(event) {
-   toggleForm("signup", "login")
+   toggleForm("signup", "login");
 });
 
 $('.submit-button').click(function(event) {
@@ -107,14 +109,30 @@ $('#logout').click(function(event) {
 });
 
 $('#yt').click(function(event) {
-  togglePostForm("yt", "img", "gm", "post")
+  togglePostForm("yt", "img", "gm", "text");
+  $('.img-desc').addClass("hidden");
+  $('.post-desc').addClass("hidden");
+  $('.gm-desc').addClass("hidden");
+  $('.yt-desc').removeClass("hidden");
 });
 $('#img').click(function(event) {
-  togglePostForm("img", "yt", "gm", "post")
+  togglePostForm("img", "yt", "gm", "text");
+  $('.img-desc').removeClass("hidden");
+  $('.post-desc').addClass("hidden");
+  $('.gm-desc').addClass("hidden");
+  $('.yt-desc').addClass("hidden");
 });
 $('#gm').click(function(event) {
-  togglePostForm("gm", "img", "yt", "post")
+  togglePostForm("gm", "img", "yt", "text");
+  $('.post-desc').addClass("hidden");
+  $('.gm-desc').removeClass("hidden");
+  $('.yt-desc').addClass("hidden");
+  $('.img-desc').addClass("hidden");
 });
-$('#post').click(function(event) {
-  togglePostForm("post", "img", "gm", "yt")
+$('#text').click(function(event) {
+  togglePostForm("text", "img", "gm", "yt");
+  $('.post-desc').removeClass("hidden");
+  $('.gm-desc').addClass("hidden");
+  $('.yt-desc').addClass("hidden");
+  $('.img-desc').addClass("hidden");
 });

@@ -248,9 +248,9 @@ form #sub:hover {
 }
 
 .journal-field {
-  /* margin-top: 15px; */
   margin-top: 25px;
   border: none;
+  outline: none;
 }
 
 .post-rectangle {
@@ -260,6 +260,25 @@ form #sub:hover {
 .post-desc {
   height: 100px;
   width: 70%;
+  outline: none;
+  padding: 6px 5px 5px 10px;
+  box-sizing: border-box;
+}
+
+.gm-desc {
+  height: 50px;
+  width: 70%;
+  outline: none;
+  padding: 6px 5px 5px 10px;
+  box-sizing: border-box;
+}
+
+.yt-desc, .img-desc {
+  height: 50px;
+  width: 70%;
+  outline: none;
+  padding: 6px 5px 5px 10px;
+  box-sizing: border-box;
 }
 
 .post-title {
@@ -282,7 +301,6 @@ form #sub:hover {
   width: 70%;
   height: 25px;
   margin: 25px auto;
-  /* background-color: white; */
 }
 
 .post-option-type{
@@ -293,22 +311,17 @@ form #sub:hover {
   border-radius: 5px;
   background-color: white;
   border: 1px solid slategrey;
+  outline: none;
 }
 
-.type #yt:hover, #img:hover, #gm:hover, #post:hover {
+.type #yt:hover, #img:hover, #gm:hover, #text:hover {
   background-color: #B0E2F8;
   border: none;
 }
 
-/* .type #post:hover {
-  background-color: #CA4F3E;
-  border: none;
-} */
-
 /* POST */
 
 .post-display {
-  /* margin: 40px; */
   background-color: white;
   height: 100%;
 }
