@@ -311,12 +311,22 @@ form #sub:hover {
   border-radius: 5px;
   background-color: white;
   border: 1px solid slategrey;
+  padding: 2px 1px 1px 1px;
   outline: none;
 }
 
 .type #yt:hover, #img:hover, #gm:hover, #text:hover {
   background-color: #B0E2F8;
   border: none;
+}
+
+.type #submit-post:hover {
+  background-color: #F1948A;
+  border: none;
+}
+
+#submit-post {
+  float: right;
 }
 
 /* POST */
