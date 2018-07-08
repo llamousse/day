@@ -5,8 +5,8 @@ const { Post } = require("./models");
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
-// NOTE YOU MIGHT NEED BODY PARSER ON POST PUT
-// Change BlogPost to Post
+// YOU MIGHT NEED BODY PARSER ON POST PUT
+// Change BlogPost to Post - done
 
 router.get("/", (req, res) => {
   Post.find()
@@ -29,7 +29,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const requiredFields = ["title", "content", "author"];
+  const requiredFields = ["title", "date", "description"];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -39,12 +39,12 @@ router.post("/", (req, res) => {
     }
   }
 
-  BlogPost.create({
+  Post.create({
     title: req.body.title,
-    content: req.body.content,
-    author: req.body.author
+    date: req.body.date,
+    escription: req.body.description
   })
-    .then(blogPost => res.status(201).json(blogPost.serialize()))
+    .then(nPost => res.status(201).json(nPost.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: "Something went wrong" });
@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  BlogPost.findByIdAndRemove(req.params.id)
+  Post.findByIdAndRemove(req.params.id)
     .then(() => {
       res.status(204).json({ message: "success" });
     })
@@ -70,14 +70,14 @@ router.put("/:id", (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ["title", "content", "author"];
+  const updateableFields = ["title", "date", "description"];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
     }
   });
 
-  BlogPost.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+  Post.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
     .then(updatedPost => res.status(204).end())
     .catch(err => res.status(500).json({ message: "Something went wrong" }));
 });

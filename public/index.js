@@ -1,3 +1,34 @@
+// const POST_URL = "/posts";
+//
+// function getDataFromApi(lat, lng, callback) {
+//   const settings = {
+//     url: POST_URL,
+//     data: {
+//       latitude: lat,
+//       longitude: lng
+//     },
+//     dataType: "json",
+//     type: "GET",
+//     success: callback,
+//     error: function(error) {
+//       console.log("error", error);
+//     }
+//   };
+//   $.ajax(settings);
+// }
+//
+// function renderGoogleMaps(lat, lng) {
+//   let mapOptions = {
+//     center: { lat: lat, lng: lng },
+//     zoom: 14,
+//     zoomControl: true,
+//     gestureHandling: 'greedy'
+//   };
+//   map = new google.maps.Map(document.getElementById("map"), mapOptions);
+// }
+
+//////////////////////////////////////////////////////////////////////////
+
 $(window).on("scroll", function() {
   if($(window).scrollTop() > 350) {
     $(".home-nav").css("background-color", "#94806A");

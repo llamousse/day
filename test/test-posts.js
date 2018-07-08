@@ -114,11 +114,11 @@ describe('/api/posts', function() {
   //   // then prove that the post we get back has
   //   // right keys, and that `id` is there (which means
   //   // the data was inserted into db)
-  //   it('should add a new blog post', function () {
+  //   it('should add a new post', function () {
   //
   //     const newPost = {
-  //       title,
-  //       type,
+  //       title = 'coffee time',
+  //       description = 'yes yes yes',
   //       date: Date.now()
   //     };
   //
@@ -129,21 +129,19 @@ describe('/api/posts', function() {
   //         res.should.have.status(201);
   //         res.should.be.json;
   //         res.body.should.be.a('object');
-  //         res.body.should.include.keys(
-  //           'id', 'title', 'content', 'author', 'created');
+  //         // res.body.should.include.keys(
+  //         //   'title', 'date', 'description');
   //         res.body.title.should.equal(newPost.title);
   //         // cause Mongo should have created id on insertion
   //         res.body.id.should.not.be.null;
-  //         res.body.author.should.equal(
-  //           `${newPost.author.firstName} ${newPost.author.lastName}`);
-  //         res.body.content.should.equal(newPost.content);
+  //         res.body.date.should.equal(newPost.date || Date.now());
+  //         res.body.description.should.equal(newPost.description);
   //         return Post.findById(res.body.id);
   //       })
   //       .then(function (post) {
   //         post.title.should.equal(newPost.title);
-  //         post.content.should.equal(newPost.content);
-  //         post.author.firstName.should.equal(newPost.author.firstName);
-  //         post.author.lastName.should.equal(newPost.author.lastName);
+  //         post.date.should.equal(newPost.date);
+  //         post.description.should.equal(newPost.description);
   //       });
   //   });
   // });
@@ -157,11 +155,8 @@ describe('/api/posts', function() {
   //   it('should update fields you send over', function () {
   //     const updateData = {
   //       title: 'cats cats cats',
-  //       content: 'dogs dogs dogs',
-  //       author: {
-  //         firstName: 'foo',
-  //         lastName: 'bar'
-  //       }
+  //       description: 'dogs dogs dogs',
+  //       date: Date.now()
   //     };
   //
   //     return Post
@@ -179,40 +174,31 @@ describe('/api/posts', function() {
   //       })
   //       .then(post => {
   //         post.title.should.equal(updateData.title);
-  //         post.content.should.equal(updateData.content);
-  //         post.author.firstName.should.equal(updateData.author.firstName);
-  //         post.author.lastName.should.equal(updateData.author.lastName);
+  //         post.description.should.equal(updateData.description);
+  //         post.author.date.should.equal(updateData.author.date);
   //       });
   //   });
   // });
 
-  // describe('DELETE endpoint', function () {
-  //   // strategy:
-  //   //  1. get a post
-  //   //  2. make a DELETE request for that post's id
-  //   //  3. assert that response has right status code
-  //   //  4. prove that post with the id doesn't exist in db anymore
-  //   it('should delete a post by id', function () {
-  //
-  //     let post;
-  //
-  //     return Post
-  //       .findOne()
-  //       .then(_post => {
-  //         post = _post;
-  //         return chai.request(app).delete(`/api/posts/${post.id}`);
-  //       })
-  //       .then(res => {
-  //         res.should.have.status(204);
-  //         return Post.findById(post.id);
-  //       })
-  //       .then(_post => {
-  //         // when a variable's value is null, chaining `should`
-  //         // doesn't work. so `_post.should.be.null` would raise
-  //         // an error. `should.be.null(_post)` is how we can
-  //         // make assertions about a null value.
-  //         should.not.exist(_post);
-  //       });
-  //   });
-  // });
+  describe('DELETE endpoint', function () {
+
+    it('should delete a post by id', function () {
+
+      let post;
+
+      return Post
+        .findOne()
+        .then(_post => {
+          post = _post;
+          return chai.request(app).delete(`/api/posts/${post.id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return Post.findById(post.id);
+        })
+        .then(_post => {
+          should.not.exist(_post);
+        });
+    });
+  });
 });
