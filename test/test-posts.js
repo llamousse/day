@@ -58,11 +58,7 @@ describe('/api/posts', function() {
   describe('GET endpoint', function () {
 
     it('should return all existing posts', function () {
-      // strategy:
-      //    1. get back all posts returned by by GET request to `/posts`
-      //    2. prove res has right status, data type
-      //    3. prove the number of posts we got back is equal to number
-      //       in db.
+
       let res;
       return chai.request(app)
         .get('/api/posts')
@@ -73,11 +69,12 @@ describe('/api/posts', function() {
           return Post.count();
         })
         .then(count => {
-          // the number of returned posts should be same
-          // as number of posts in DB
+
           res.body.should.have.lengthOf(count);
         });
     });
+
+////////////////////////////////////////////////////////////////////////////////
 
     it('should return posts with right fields', function () {
       // Strategy: Get back all posts, and ensure they have expected keys
@@ -109,76 +106,77 @@ describe('/api/posts', function() {
     });
   });
 
-  // describe('POST endpoint', function () {
-  //   // strategy: make a POST request with data,
-  //   // then prove that the post we get back has
-  //   // right keys, and that `id` is there (which means
-  //   // the data was inserted into db)
-  //   it('should add a new post', function () {
-  //
-  //     const newPost = {
-  //       title = 'coffee time',
-  //       description = 'yes yes yes',
-  //       date: Date.now()
-  //     };
-  //
-  //     return chai.request(app)
-  //       .post('/api/posts')
-  //       .send(newPost)
-  //       .then(function (res) {
-  //         res.should.have.status(201);
-  //         res.should.be.json;
-  //         res.body.should.be.a('object');
-  //         // res.body.should.include.keys(
-  //         //   'title', 'date', 'description');
-  //         res.body.title.should.equal(newPost.title);
-  //         // cause Mongo should have created id on insertion
-  //         res.body.id.should.not.be.null;
-  //         res.body.date.should.equal(newPost.date || Date.now());
-  //         res.body.description.should.equal(newPost.description);
-  //         return Post.findById(res.body.id);
-  //       })
-  //       .then(function (post) {
-  //         post.title.should.equal(newPost.title);
-  //         post.date.should.equal(newPost.date);
-  //         post.description.should.equal(newPost.description);
-  //       });
-  //   });
-  // });
+  describe('POST endpoint', function () {
+    // prove that the post we get back has
+    // right keys, and that `id` is there (which means
+    // the data was inserted into db)
+    it('should add a new post', function () {
 
-  // describe('PUT endpoint', function () {
-  //
-  //   // strategy:
-  //   //  1. Get an existing post from db
-  //   //  2. Make a PUT request to update that post
-  //   //  4. Prove post in db is correctly updated
-  //   it('should update fields you send over', function () {
-  //     const updateData = {
-  //       title: 'cats cats cats',
-  //       description: 'dogs dogs dogs',
-  //       date: Date.now()
-  //     };
-  //
-  //     return Post
-  //       .findOne()
-  //       .then(post => {
-  //         updateData.id = post.id;
-  //
-  //         return chai.request(app)
-  //           .put(`/api/posts/${post.id}`)
-  //           .send(updateData);
-  //       })
-  //       .then(res => {
-  //         res.should.have.status(204);
-  //         return Post.findById(updateData.id);
-  //       })
-  //       .then(post => {
-  //         post.title.should.equal(updateData.title);
-  //         post.description.should.equal(updateData.description);
-  //         post.author.date.should.equal(updateData.author.date);
-  //       });
-  //   });
-  // });
+      const newPost = {
+        title,
+        description,
+        date: Date.now()
+      };
+
+      return chai.request(app)
+        .post('/api/posts')
+        .send(newPost)
+        .then(function (res) {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.include.keys(
+            'title', 'date', 'description');
+          res.body.title.should.equal(newPost.title);
+          // cause Mongo should have created id on insertion
+          res.body.id.should.not.be.null;
+          res.body.date.should.equal(newPost.date || Date.now());
+          res.body.description.should.equal(newPost.description);
+          return Post.findById(res.body.id);
+        })
+        .then(function (post) {
+          post.title.should.equal(newPost.title);
+          post.date.should.equal(newPost.date);
+          post.description.should.equal(newPost.description);
+        });
+    });
+  });
+
+  describe('PUT endpoint', function () {
+
+    // strategy:
+    //  1. Get an existing post from db
+    //  2. Make a PUT request to update that post
+    //  4. Prove post in db is correctly updated
+    it('should update fields you send over', function () {
+      const updateData = {
+        title: 'cats cats cats',
+        description: 'dogs dogs dogs',
+        date: Date.now()
+      };
+
+      return Post
+        .findOne()
+        .then(post => {
+          updateData.id = post.id;
+
+          return chai.request(app)
+            .put(`/api/posts/${post.id}`)
+            .send(updateData);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return Post.findById(updateData.id);
+        })
+        .then(post => {
+          post.title.should.equal(updateData.title);
+          post.description.should.equal(updateData.description);
+          post.author.date.should.equal(updateData.author.date);
+        });
+    });
+  });
+
+////////////////////////////////////////////////////////////////////////////////
 
   describe('DELETE endpoint', function () {
 
@@ -199,6 +197,7 @@ describe('/api/posts', function() {
         .then(_post => {
           should.not.exist(_post);
         });
+
     });
   });
 });

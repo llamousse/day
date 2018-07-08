@@ -1,31 +1,48 @@
-// const POST_URL = "/posts";
-//
-// function getDataFromApi(lat, lng, callback) {
-//   const settings = {
-//     url: POST_URL,
-//     data: {
-//       latitude: lat,
-//       longitude: lng
-//     },
-//     dataType: "json",
-//     type: "GET",
-//     success: callback,
-//     error: function(error) {
-//       console.log("error", error);
-//     }
-//   };
-//   $.ajax(settings);
-// }
-//
-// function renderGoogleMaps(lat, lng) {
-//   let mapOptions = {
-//     center: { lat: lat, lng: lng },
-//     zoom: 14,
-//     zoomControl: true,
-//     gestureHandling: 'greedy'
-//   };
-//   map = new google.maps.Map(document.getElementById("map"), mapOptions);
-// }
+const POST_URL = "/posts";
+
+function getDataFromApi(lat, lng, callback) {
+  const settings = {
+    url: POST_URL,
+    data: {
+      latitude: lat,
+      longitude: lng
+    },
+    dataType: "json",
+    type: "GET",
+    success: callback,
+    error: function(error) {
+      console.log("error", error);
+    }
+  };
+  $.ajax(settings);
+}
+
+function postDataFromApi(lat, lng, callback) {
+  const settings2 = {
+    url: POST_URL,
+    data: {
+      latitude: lat,
+      longitude: lng
+    },
+    dataType: "json",
+    type: "POST",
+    success: callback,
+    error: function(error) {
+      console.log("error", error);
+    }
+  };
+  $.ajax(settings2);
+}
+
+function renderGoogleMaps(lat, lng) {
+  let mapOptions = {
+    center: { lat: lat, lng: lng },
+    zoom: 14,
+    zoomControl: true,
+    gestureHandling: 'greedy'
+  };
+  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+}
 
 //////////////////////////////////////////////////////////////////////////
 
