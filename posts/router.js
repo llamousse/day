@@ -6,7 +6,6 @@ const router = express.Router();
 const jsonParser = bodyParser.json();
 
 // YOU MIGHT NEED BODY PARSER ON POST PUT
-// Change BlogPost to Post - done
 
 router.get("/", (req, res) => {
   Post.find()
@@ -28,7 +27,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", jsonParser, (req, res) => {
   const requiredFields = ["title", "date", "description"];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -42,7 +41,7 @@ router.post("/", (req, res) => {
   Post.create({
     title: req.body.title,
     date: req.body.date,
-    escription: req.body.description
+    description: req.body.description
   })
     .then(nPost => res.status(201).json(nPost.serialize()))
     .catch(err => {
@@ -62,7 +61,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", jsonParser, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: "Request path id and request body id values must match"

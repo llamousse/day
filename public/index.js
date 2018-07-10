@@ -1,48 +1,67 @@
-const POST_URL = "/posts";
+// const MAPS_URL = "https://www.google.com/maps/place/";
 
-function getDataFromApi(lat, lng, callback) {
-  const settings = {
-    url: POST_URL,
-    data: {
-      latitude: lat,
-      longitude: lng
-    },
-    dataType: "json",
-    type: "GET",
-    success: callback,
-    error: function(error) {
-      console.log("error", error);
-    }
-  };
-  $.ajax(settings);
-}
+// https://www.google.com/maps/place/34.086877199999996+-118.12311590000002/@34.086877199999996,-118.12311590000002,17z
 
-function postDataFromApi(lat, lng, callback) {
-  const settings2 = {
-    url: POST_URL,
-    data: {
-      latitude: lat,
-      longitude: lng
-    },
-    dataType: "json",
-    type: "POST",
-    success: callback,
-    error: function(error) {
-      console.log("error", error);
-    }
-  };
-  $.ajax(settings2);
-}
+// function getDataFromApi() {
+//   const settings = {
+//     data: {
+//       title: title,
+//       date: date,
+//       description: desc
+//     },
+//     dataType: "json",
+//     type: "GET",
+//     success: callback,
+//     error: function(error) {
+//       console.log("error", error);
+//     }
+//   };
+//   $.ajax(settings);
+// }
 
-function renderGoogleMaps(lat, lng) {
-  let mapOptions = {
-    center: { lat: lat, lng: lng },
-    zoom: 14,
-    zoomControl: true,
-    gestureHandling: 'greedy'
-  };
-  map = new google.maps.Map(document.getElementById("map"), mapOptions);
-}
+// function getDataFromApi(lat, lng, callback) {
+//   const settings = {
+//     // url: MAPS_URL,
+//     data: {
+//       latitude: lat,
+//       longitude: lng
+//     },
+//     dataType: "json",
+//     type: "GET",
+//     success: callback,
+//     error: function(error) {
+//       console.log("error", error);
+//     }
+//   };
+//   $.ajax(settings);
+// }
+
+// function postDataFromApi(lat, lng, callback) {
+//   const settings2 = {
+//     url: POST_URL,
+//     data: {
+//       latitude: lat,
+//       longitude: lng
+//     },
+//     dataType: "json",
+//     type: "POST",
+//     success: callback,
+//     error: function(error) {
+//       console.log("error", error);
+//     }
+//   };
+//   $.ajax(settings2);
+// }
+
+// function renderGoogleMaps(lat, lng) {
+//   let mapOptions = {
+//     center: { lat: lat, lng: lng },
+//     zoom: 14,
+//     zoomControl: true,
+//     gestureHandling: 'greedy'
+//   };
+//   map = new google.maps.Map(document.getElementById("map"), mapOptions);
+// }
 
 //////////////////////////////////////////////////////////////////////////
 
