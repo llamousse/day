@@ -48,7 +48,6 @@ describe("/api/posts", function() {
   });
 
   afterEach(function() {
-    // return Post.remove({});
     return tearDownDb();
   });
 
@@ -73,13 +72,10 @@ describe("/api/posts", function() {
         });
     });
 
-    ////////////////////////////////////////////////////////////////////////////////
-
     it("should return posts with right fields", function() {
 
-      // Strategy: Get back all posts, and ensure they have expected keys
-
       let resPost;
+
       return chai
         .request(app)
         .get("/api/posts")
@@ -94,12 +90,12 @@ describe("/api/posts", function() {
           res.body.forEach(function(post) {
             post.should.be.a("object");
             post.should.include.keys("title", "date", "description");
-
           });
-          // just check one of the posts that its values match with those in db
-          // and we'll assume it's true for rest
+
           resPost = res.body[0];
+
           return Post.findById(resPost.id);
+
         })
         .then(post => {
           resPost.title.should.equal(post.title);
@@ -110,9 +106,6 @@ describe("/api/posts", function() {
   });
 
   describe("POST endpoint", function() {
-    // prove that the post we get back has
-    // right keys, and that `id` is there (which means
-    // the data was inserted into db)
     it("should add a new post", function() {
       const newPost = {
         title,
@@ -130,7 +123,7 @@ describe("/api/posts", function() {
           res.body.should.be.a("object");
           res.body.should.include.keys("title", "date", "description");
           res.body.title.should.equal(newPost.title);
-          // cause Mongo should have created id on insertion
+
           res.body.id.should.not.be.null;
           res.body.date.should.equal(newPost.date || Date.now());
           res.body.description.should.equal(newPost.description);
@@ -145,10 +138,6 @@ describe("/api/posts", function() {
   });
 
   describe("PUT endpoint", function() {
-    // strategy:
-    //  1. Get an existing post from db
-    //  2. Make a PUT request to update that post
-    //  4. Prove post in db is correctly updated
     it("should update fields you send over", function() {
       const updateData = {
         title: "cats cats cats",
@@ -176,8 +165,6 @@ describe("/api/posts", function() {
         });
     });
   });
-
-  ////////////////////////////////////////////////////////////////////////////////
 
   describe("DELETE endpoint", function() {
     it("should delete a post by id", function() {

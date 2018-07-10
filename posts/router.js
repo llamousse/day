@@ -20,7 +20,9 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   Post.findById(req.params.id)
-    .then(post => res.json(post.serialize()))
+    .then(post => {
+      res.json(post.serialize())
+    })
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: "something went horribly awry" });
@@ -43,10 +45,10 @@ router.post("/", jsonParser, (req, res) => {
     date: req.body.date,
     description: req.body.description
   })
-    .then(nPost => res.status(201).json(nPost.serialize()))
+    .then(Post => res.status(201).json(Post.serialize()))
     .catch(err => {
       console.error(err);
-      res.status(500).json({ error: "Something went wrong" });
+      res.status(500).json({ error: "something went wrong" });
     });
 });
 
@@ -78,7 +80,7 @@ router.put("/:id", jsonParser, (req, res) => {
 
   Post.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
     .then(updatedPost => res.status(204).end())
-    .catch(err => res.status(500).json({ message: "Something went wrong" }));
+    .catch(err => res.status(500).json({ message: "something went wrong" }));
 });
 
 module.exports = { router };

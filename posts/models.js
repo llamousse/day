@@ -6,11 +6,19 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 const PostSchema = mongoose.Schema({
-  title: { type: String, default: "" },
+  title: {
+    type: String,
+    default: ""
+  },
   // type: { type: String, default: "" }, // -> video, description, image, location
-  date: { type: Date, default: Date.now() },
-  ///
-  description: { type: String, default: "" }
+  date: {
+    type: Date,
+    default: Date.now()
+  },
+  description: {
+    type: String,
+    default: ""
+  }
   // image_url: { type: String, default: "" },
   // video_url: { type: String, default: "" },
   // location: {
