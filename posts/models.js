@@ -21,9 +21,9 @@ const PostSchema = mongoose.Schema({
 
 PostSchema.methods.serialize = function() {
   return {
-    // firstName: this.firstName || '',
-    // lastName: this.lastName || '',
-    // email: this.email || ''
+    title: this.title || "",
+    date: this.date || "",
+    description: this.description || ""
   };
 };
 
