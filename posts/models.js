@@ -29,6 +29,7 @@ const PostSchema = mongoose.Schema({
 
 PostSchema.methods.serialize = function() {
   return {
+    id: this.id,
     title: this.title || "",
     date: this.date || Date.now(),
     description: this.description || ""

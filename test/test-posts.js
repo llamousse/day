@@ -85,7 +85,7 @@ describe("/api/posts", function() {
           res.body.should.be.a("array");
           res.body.should.have.lengthOf.at.least(1);
 
-          console.log(res.body); //THIS LETS YOU SEE THE POSTS IN THE CONSOLE
+          // console.log(res.body); //THIS LETS YOU SEE THE POSTS IN THE CONSOLE
 
           res.body.forEach(function(post) {
             post.should.be.a("object");
@@ -97,19 +97,19 @@ describe("/api/posts", function() {
           return Post.findById(resPost.id);
 
         })
-        .then(post => {
+        .then(function(post) {
           resPost.title.should.equal(post.title);
-          resPost.date.should.equal(post.date);
           resPost.description.should.equal(post.description);
         });
     });
+
   });
 
   describe("POST endpoint", function() {
     it("should add a new post", function() {
       const newPost = {
-        title,
-        description,
+        title: "this is a post",
+        description: "test test test",
         date: Date.now()
       };
 
@@ -123,15 +123,12 @@ describe("/api/posts", function() {
           res.body.should.be.a("object");
           res.body.should.include.keys("title", "date", "description");
           res.body.title.should.equal(newPost.title);
-
           res.body.id.should.not.be.null;
-          res.body.date.should.equal(newPost.date || Date.now());
           res.body.description.should.equal(newPost.description);
           return Post.findById(res.body.id);
         })
         .then(function(post) {
           post.title.should.equal(newPost.title);
-          post.date.should.equal(newPost.date);
           post.description.should.equal(newPost.description);
         });
     });
@@ -161,7 +158,6 @@ describe("/api/posts", function() {
         .then(post => {
           post.title.should.equal(updateData.title);
           post.description.should.equal(updateData.description);
-          post.author.date.should.equal(updateData.author.date);
         });
     });
   });
