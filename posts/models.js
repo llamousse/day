@@ -22,7 +22,11 @@ const PostSchema = mongoose.Schema({
 PostSchema.methods.serialize = function() {
   return {
     title: this.title || "",
-    date: this.date || Date.now(),
+<<<<<<< HEAD
+  
+=======
+    date: this.date || "",
+>>>>>>> b20cd7899a2d46c4d9ecc3de3b7ac04ee9a40b35
     description: this.description || ""
   };
 };

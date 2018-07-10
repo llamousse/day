@@ -74,9 +74,14 @@ describe("/api/posts", function() {
     });
 
     ////////////////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
+
+
+
+=======
 
     it("should return posts with right fields", function() {
-
+>>>>>>> b20cd7899a2d46c4d9ecc3de3b7ac04ee9a40b35
       // Strategy: Get back all posts, and ensure they have expected keys
 
       let resPost;
@@ -89,12 +94,19 @@ describe("/api/posts", function() {
           res.body.should.be.a("array");
           res.body.should.have.lengthOf.at.least(1);
 
-          console.log("Hello");
+<<<<<<< HEAD
+
+=======
+>>>>>>> b20cd7899a2d46c4d9ecc3de3b7ac04ee9a40b35
           console.log(res.body); //THIS LETS YOU SEE THE POSTS IN THE CONSOLE
 
           res.body.forEach(function(post) {
             post.should.be.a("object");
-            post.should.include.keys("title", "date", "description");
+<<<<<<< HEAD
+          
+=======
+            post.should.include.keys("date", "title", "description");
+>>>>>>> b20cd7899a2d46c4d9ecc3de3b7ac04ee9a40b35
           });
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
