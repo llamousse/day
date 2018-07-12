@@ -265,9 +265,18 @@ form #sub:hover {
   box-sizing: border-box;
 }
 
-.gm-desc {
+.gm-desc-lat {
   height: 50px;
-  width: 70%;
+  /* width: 70%; */
+  width: 35%;
+  outline: none;
+  padding: 6px 5px 5px 10px;
+  box-sizing: border-box;
+}
+
+.gm-desc-lng {
+  height: 50px;
+  width: 35%;
   outline: none;
   padding: 6px 5px 5px 10px;
   box-sizing: border-box;
@@ -331,12 +340,20 @@ form #sub:hover {
 
 /* POST */
 
-.post-display {
+.posts {
   background-color: white;
   height: 100%;
 }
 
-.post-display h1 {
+.posts h1 {
   margin: 0;
   padding: 50px 70px;
+}
+
+/* #journal-posts {
+
+} */
+
+.post-content {
+
 }

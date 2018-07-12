@@ -1,40 +1,52 @@
-// const MAPS_URL = "https://www.google.com/maps/place/";
 
-// https://www.google.com/maps/place/34.086877199999996+-118.12311590000002/@34.086877199999996,-118.12311590000002,17z
+$('.submit-button').click(function(event) {
 
-// function getDataFromApi() {
-//   const settings = {
-//     data: {
-//       title: title,
-//       date: date,
-//       description: desc
-//     },
-//     dataType: "json",
-//     type: "GET",
-//     success: callback,
-//     error: function(error) {
-//       console.log("error", error);
-//     }
-//   };
-//   $.ajax(settings);
-// }
+  function getDataFromApi() {
+    const settings = {
+      url: '/api/posts',
+      dataType: "json",
+      type: "GET",
+      success: function(data) {
+        console.log(data);
+        displayPostData(data);
+      },
+      error: function(error) {
+        console.log("error", error);
+      }
+    };
+    $.ajax(settings);
+  }
 
-// function getDataFromApi(lat, lng, callback) {
-//   const settings = {
-//     // url: MAPS_URL,
-//     data: {
-//       latitude: lat,
-//       longitude: lng
-//     },
-//     dataType: "json",
-//     type: "GET",
-//     success: callback,
-//     error: function(error) {
-//       console.log("error", error);
-//     }
-//   };
-//   $.ajax(settings);
-// }
+  function displayPostData(data) {
+
+    var results = data.map((post, index) => {
+      return renderResult(post, index);
+    });
+
+    if (results.length > 0) {
+      $(".posts").html(results);
+    }
+    else {
+      $(".posts").html(`<h2>No results found.</h2>`);
+    }
+  }
+
+  function renderResult(post, index) {
+    return `
+      <div class="post-content" data-index="${index}">
+        <h1>${post.date}</h1>
+        <p>${post.title}</p>
+        <p>${post.description}</p>
+      </div>
+      `;
+  }
+
+  $(function () {
+    getDataFromApi();
+
+  });
+
+});
 
 // function postDataFromApi(lat, lng, callback) {
 //   const settings2 = {
@@ -53,17 +65,7 @@
 //   $.ajax(settings2);
 // }
 
-// function renderGoogleMaps(lat, lng) {
-//   let mapOptions = {
-//     center: { lat: lat, lng: lng },
-//     zoom: 14,
-//     zoomControl: true,
-//     gestureHandling: 'greedy'
-//   };
-//   map = new google.maps.Map(document.getElementById("map"), mapOptions);
-// }
-
-//////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 $(window).on("scroll", function() {
   if($(window).scrollTop() > 350) {
@@ -148,13 +150,12 @@ function loggedOut() {
   $('.sidebar-button').toggleClass("hidden");
 }
 
-//////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 $('.home-nav').on('click', '.sidebar-menu', function(event) {
   event.preventDefault();
   sideBarMenu();
 });
-
 $('.rectangle').on('click', '.login', function(event) {
    toggleForm("login", "signup");
 });
@@ -167,7 +168,6 @@ $('#sidebar-login').click(function(event) {
 $('#sidebar-signup').click(function(event) {
    toggleForm("signup", "login");
 });
-
 $('.submit-button').click(function(event) {
   loggedIn();
 });
@@ -179,27 +179,31 @@ $('#yt').click(function(event) {
   togglePostForm("yt", "img", "gm", "text");
   $('.img-desc').addClass("hidden");
   $('.post-desc').addClass("hidden");
-  $('.gm-desc').addClass("hidden");
+  $('.gm-desc-lat').addClass("hidden");
+  $('.gm-desc-lng').addClass("hidden");
   $('.yt-desc').removeClass("hidden");
 });
 $('#img').click(function(event) {
   togglePostForm("img", "yt", "gm", "text");
   $('.img-desc').removeClass("hidden");
   $('.post-desc').addClass("hidden");
-  $('.gm-desc').addClass("hidden");
+  $('.gm-desc-lat').addClass("hidden");
+  $('.gm-desc-lng').addClass("hidden");
   $('.yt-desc').addClass("hidden");
 });
 $('#gm').click(function(event) {
   togglePostForm("gm", "img", "yt", "text");
   $('.post-desc').addClass("hidden");
-  $('.gm-desc').removeClass("hidden");
+  $('.gm-desc-lat').removeClass("hidden");
+  $('.gm-desc-lng').removeClass("hidden");
   $('.yt-desc').addClass("hidden");
   $('.img-desc').addClass("hidden");
 });
 $('#text').click(function(event) {
   togglePostForm("text", "img", "gm", "yt");
   $('.post-desc').removeClass("hidden");
-  $('.gm-desc').addClass("hidden");
+  $('.gm-desc-lat').addClass("hidden");
+  $('.gm-desc-lng').addClass("hidden");
   $('.yt-desc').addClass("hidden");
   $('.img-desc').addClass("hidden");
 });
