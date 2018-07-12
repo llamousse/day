@@ -1,6 +1,10 @@
 
 $('.submit-button').click(function(event) {
 
+  var $title = $('#p-title');
+  var $date = $('#p-date');
+  var $description = $('#post-desc');
+
   function getDataFromApi() {
     const settings = {
       url: '/api/posts',
@@ -17,8 +21,31 @@ $('.submit-button').click(function(event) {
     $.ajax(settings);
   }
 
-  function displayPostData(data) {
+  function postDataFromApi() {
 
+    var posts = {
+      title: $title.val(),
+      date: $date.val(),
+      description: $description.val(),
+    };
+
+    const settings2 = {
+      url: '/api/posts',
+      data: posts,
+      dataType: "json",
+      type: "POST",
+      success: function(newPost) {
+        console.log(newPost);
+        displayPostData(newPost);
+      },
+      error: function(error) {
+        console.log("error", error);
+      }
+    };
+    $.ajax(settings2);
+  }
+
+  function displayPostData(data) {
     var results = data.map((post, index) => {
       return renderResult(post, index);
     });
@@ -35,7 +62,7 @@ $('.submit-button').click(function(event) {
     return `
       <div class="post-content" data-index="${index}">
         <h1>${post.date}</h1>
-        <p>${post.title}</p>
+        <h2>${post.title}</h2>
         <p>${post.description}</p>
       </div>
       `;
@@ -43,27 +70,9 @@ $('.submit-button').click(function(event) {
 
   $(function () {
     getDataFromApi();
-
+    postDataFromApi();
   });
-
 });
-
-// function postDataFromApi(lat, lng, callback) {
-//   const settings2 = {
-//     url: POST_URL,
-//     data: {
-//       latitude: lat,
-//       longitude: lng
-//     },
-//     dataType: "json",
-//     type: "POST",
-//     success: callback,
-//     error: function(error) {
-//       console.log("error", error);
-//     }
-//   };
-//   $.ajax(settings2);
-// }
 
 ///////////////////////////////////////////////////////////////////////////////
 
