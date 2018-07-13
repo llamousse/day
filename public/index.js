@@ -1,23 +1,49 @@
+var state = {
+  type: "text"
+}
+
 // When you load the doc, get the posts
 $(function() {
   getDataFromApi();
 });
 
 // When someone fills the form and sends, create a post
-$(".submit-button").click(function(event) {
+$("#submit-post").click(function(event) {
   postDataToApi();
 });
 
 function postDataToApi() {
+
   var post = {
-    title: $("#p-title").val(),
+    title: $('#p-title').val(),
     date: $("#p-date").val(),
-    description: $("#post-desc").val()
+    description: $("#p-desc").val(),
+    type: state.type
   };
+
+  if (state.type === "text") {
+    post.description = $("#p-desc").val();
+  }
+  else if (state.type === "video") {
+    post.video_url = $("#yt-desc").val();
+  }
+  else if (state.type === "image") {
+    post.image_url = $("#img-desc").val();
+  }
+  else {
+    post.location = {
+        lat: $("#gm-lat").val(),
+        lng: $("#gm-lng").val()
+    }
+  }
+
+  console.log(post);
+
   const settings = {
     url: "/api/posts",
     data: JSON.stringify(post),
     dataType: "json",
+    contentType: "application/json",
     type: "POST",
     success: function(newPost) {
       console.log(newPost);
@@ -59,11 +85,17 @@ function displayPostData(data) {
 }
 
 function renderResult(post, index) {
+
+// NEED IF ELSE + EMBED LINKS
+
   return `
       <div class="post-content" data-index="${index}">
         <h1>${post.date}</h1>
         <h2>${post.title}</h2>
         <p>${post.description}</p>
+        <p>${post.video_url}</p>
+        <p>${post.image_url}</p>
+        <p>${post.location}</p>
       </div>
       `;
 }
@@ -180,6 +212,7 @@ $('#logout').click(function(event) {
 
 $('#yt').click(function(event) {
   togglePostForm("yt", "img", "gm", "text");
+  state.type = "video";
   $('.img-desc').addClass("hidden");
   $('.post-desc').addClass("hidden");
   $('.gm-desc-lat').addClass("hidden");
@@ -188,6 +221,7 @@ $('#yt').click(function(event) {
 });
 $('#img').click(function(event) {
   togglePostForm("img", "yt", "gm", "text");
+  state.type = "image";
   $('.img-desc').removeClass("hidden");
   $('.post-desc').addClass("hidden");
   $('.gm-desc-lat').addClass("hidden");
@@ -196,6 +230,7 @@ $('#img').click(function(event) {
 });
 $('#gm').click(function(event) {
   togglePostForm("gm", "img", "yt", "text");
+  state.type = "maps";
   $('.post-desc').addClass("hidden");
   $('.gm-desc-lat').removeClass("hidden");
   $('.gm-desc-lng').removeClass("hidden");
@@ -204,6 +239,7 @@ $('#gm').click(function(event) {
 });
 $('#text').click(function(event) {
   togglePostForm("text", "img", "gm", "yt");
+  state.type = "text";
   $('.post-desc').removeClass("hidden");
   $('.gm-desc-lat').addClass("hidden");
   $('.gm-desc-lng').addClass("hidden");

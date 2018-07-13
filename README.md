@@ -1,9 +1,6 @@
 TODOs:
 
-1. Routes for posts.- DONE
-1. tests for posts. - DONE
-1. move video/image/maps above description + show right field. - DONE
-1. Save post button (Submit form) - DONE
-1. $ajax GET request on public/index.js to load all the posts + display them.
-1. make form $ajax POST to api. - DONE
-1. $ajax POST request on public/index.js to display new posts
+1. $ajax POST request on public/index.js to display new posts - DONE
+1. CSS style for Posts
+1. display image/video/maps post from URL
+1. authentication for sign up / log in

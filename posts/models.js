@@ -10,7 +10,7 @@ const PostSchema = mongoose.Schema({
     type: String,
     default: ""
   },
-  // type: { type: String, default: "" }, // -> video, description, image, location
+  type: { type: String, default: "" }, // -> video, description, image, location
   date: {
     type: Date,
     default: Date.now()
@@ -18,13 +18,13 @@ const PostSchema = mongoose.Schema({
   description: {
     type: String,
     default: ""
+  },
+  image_url: { type: String, default: "" },
+  video_url: { type: String, default: "" },
+  location: {
+    lat: { type: String, default: "" },
+    lng: { type: String, default: "" }
   }
-  // image_url: { type: String, default: "" },
-  // video_url: { type: String, default: "" },
-  // location: {
-  //   lat: { type: String, default: "" },
-  //   lon: { type: String, default: "" }
-  // }
 });
 
 PostSchema.methods.serialize = function() {
@@ -32,7 +32,11 @@ PostSchema.methods.serialize = function() {
     id: this.id,
     title: this.title || "",
     date: this.date || Date.now(),
-    description: this.description || ""
+    description: this.description || "",
+    type: this.type || "",
+    image_url: this.image_url || "",
+    video_url: this.video_url || "",
+    location: this.location || { lat: 0, lng: 0 }
   };
 };
 

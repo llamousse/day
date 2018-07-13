@@ -8,7 +8,7 @@ const jsonParser = bodyParser.json();
 // YOU MIGHT NEED BODY PARSER ON POST PUT
 
 router.get("/", (req, res) => {
-  Post.find()
+  Post.find({}).sort('date')
     .then(posts => {
       res.json(posts.map(post => post.serialize()));
     })
@@ -30,7 +30,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", jsonParser, (req, res) => {
-  const requiredFields = ["title", "date", "description"];
+  const requiredFields = ["title", "date", "type"];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -43,7 +43,11 @@ router.post("/", jsonParser, (req, res) => {
   Post.create({
     title: req.body.title,
     date: req.body.date,
-    description: req.body.description
+    description: req.body.description,
+    type: req.body.type,
+    image_url: req.body.image_url,
+    video_url: req.body.video_url,
+    location: req.body.location
   })
     .then(Post => res.status(201).json(Post.serialize()))
     .catch(err => {
@@ -71,7 +75,7 @@ router.put("/:id", jsonParser, (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ["title", "date", "description"];
+  const updateableFields = ["title", "date", "description", "type", "image_url", "video_url", "location"];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
