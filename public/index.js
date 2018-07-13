@@ -1,78 +1,72 @@
+// When you load the doc, get the posts
+$(function() {
+  getDataFromApi();
+});
 
-$('.submit-button').click(function(event) {
+// When someone fills the form and sends, create a post
+$(".submit-button").click(function(event) {
+  postDataToApi();
+});
 
-  var $title = $('#p-title');
-  var $date = $('#p-date');
-  var $description = $('#post-desc');
-
-  function getDataFromApi() {
-    const settings = {
-      url: '/api/posts',
-      dataType: "json",
-      type: "GET",
-      success: function(data) {
-        console.log(data);
-        displayPostData(data);
-      },
-      error: function(error) {
-        console.log("error", error);
-      }
-    };
-    $.ajax(settings);
-  }
-
-  function postDataFromApi() {
-
-    var posts = {
-      title: $title.val(),
-      date: $date.val(),
-      description: $description.val(),
-    };
-
-    const settings2 = {
-      url: '/api/posts',
-      data: posts,
-      dataType: "json",
-      type: "POST",
-      success: function(newPost) {
-        console.log(newPost);
-        displayPostData(newPost);
-      },
-      error: function(error) {
-        console.log("error", error);
-      }
-    };
-    $.ajax(settings2);
-  }
-
-  function displayPostData(data) {
-    var results = data.map((post, index) => {
-      return renderResult(post, index);
-    });
-
-    if (results.length > 0) {
-      $(".posts").html(results);
+function postDataToApi() {
+  var post = {
+    title: $("#p-title").val(),
+    date: $("#p-date").val(),
+    description: $("#post-desc").val()
+  };
+  const settings = {
+    url: "/api/posts",
+    data: JSON.stringify(post),
+    dataType: "json",
+    type: "POST",
+    success: function(newPost) {
+      console.log(newPost);
+      getDataFromApi();
+    },
+    error: function(error) {
+      console.log("error", error);
     }
-    else {
-      $(".posts").html(`<h2>No results found.</h2>`);
-    }
-  }
+  };
+  $.ajax(settings);
+}
 
-  function renderResult(post, index) {
-    return `
+function getDataFromApi() {
+  const settings = {
+    url: "/api/posts",
+    dataType: "json",
+    type: "GET",
+    success: function(data) {
+      console.log(data);
+      displayPostData(data);
+    },
+    error: function(error) {
+      console.log("error", error);
+    }
+  };
+  $.ajax(settings);
+}
+
+function displayPostData(data) {
+  var results = data.map((post, index) => {
+    return renderResult(post, index);
+  });
+
+  if (results.length > 0) {
+    $(".posts").html(results);
+  } else {
+    $(".posts").html(`<h2>No results found.</h2>`);
+  }
+}
+
+function renderResult(post, index) {
+  return `
       <div class="post-content" data-index="${index}">
         <h1>${post.date}</h1>
         <h2>${post.title}</h2>
         <p>${post.description}</p>
       </div>
       `;
-  }
-
-  $(function () {
-    getDataFromApi();
-    postDataFromApi();
-  });
-});
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
