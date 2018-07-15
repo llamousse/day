@@ -185,9 +185,20 @@ form #sub:hover {
   height: 65px;
   background-color: #94806A;
 }
-.contact-footer {
+
+.contact-footer, .home-footer {
   text-align: center;
-  padding: 20px;
+  /* padding: 20px; */
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #94806A;
+
+  height: 50px;
+}
+.home-footer p {
+  height: 10px;
 }
 
 .img-footer {

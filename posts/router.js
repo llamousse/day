@@ -9,6 +9,7 @@ const jsonParser = bodyParser.json();
 
 router.get("/", (req, res) => {
   Post.find({}).sort('date')
+  // Post.find()
     .then(posts => {
       res.json(posts.map(post => post.serialize()));
     })
