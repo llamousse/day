@@ -10,13 +10,13 @@ const jsonParser = bodyParser.json();
 router.get("/", (req, res) => {
   Post.find({}).sort('date')
   // Post.find()
-    .then(posts => {
-      res.json(posts.map(post => post.serialize()));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: "something went terribly wrong" });
-    });
+  .then(posts => {
+    res.json(posts.map(post => post.serialize()));
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ error: "something went terribly wrong" });
+  });
 });
 
 router.get("/:id", (req, res) => {
