@@ -2,6 +2,29 @@ var state = {
   type: "text"
 }
 
+function getId(url){
+    var video_id = url.split('v=')[1];
+    var ampersandPosition = video_id.indexOf('&');
+    if(ampersandPosition != -1) {
+      video_id = video_id.substring(0, ampersandPosition);
+    }
+	return video_id;
+}
+
+function dateParser (date) {
+
+  date = new Date(date);
+
+  var options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  return date.toLocaleDateString('en-US', options);
+}
+
 // When you load the doc, get the posts
 $(function() {
   getDataFromApi();
@@ -10,19 +33,20 @@ $(function() {
 // When someone fills the form and sends, create a post
 $("#submit-post").click(function(event) {
   postDataToApi();
-  document.getElementById("p-title").value = "";
-  document.getElementById("p-date").value = "";
-  document.getElementById("p-desc").value = "";
-  document.getElementById("img-desc").value = "";
-  document.getElementById("yt-desc").value = "";
-  // document.getElementById("gm-desc-lat").value = "";
+  $("#p-title").val("");
+  $("#p-date").val("");
+  $("#p-desc").val("");
+  $("#img-desc").val("");
+  $("#yt-desc").val("");
+  $("#gm-desc-lat").val("");
+  $("#gm-desc-lng").val("");
 });
 
 function postDataToApi() {
 
   var post = {
     title: $("#p-title").val(),
-    date: $("#p-date").val(),
+    date: new Date ($("#p-date").val()),
     description: $("#p-desc").val(),
     type: state.type
   };
@@ -31,7 +55,7 @@ function postDataToApi() {
     post.description = $("#p-desc").val();
   }
   else if (state.type === "video") {
-    post.video_url = $("#yt-desc").val();
+    post.video_url = getId($("#yt-desc").val());
   }
   else if (state.type === "image") {
     post.image_url = $("#img-desc").val();
@@ -92,38 +116,41 @@ function displayPostData(data) {
 
 function renderResult(post, index) {
 
-  if (`${post.description}` !== "") {
+  if (post.type === "text") {
     return `
         <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
+          <h1>${post.title}</h1>
+          <h2>${dateParser(post.date)}</h2>
           <p>${post.description}</p>
         </div>
         `;
   }
-  else if (`${post.image_url}` !== "") {
+  else if (post.type === "image") {
     return `
         <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
+          <h1>${post.title}</h1>
+          <h2>${dateParser(post.date)}</h2>
           <img src="${post.image_url}" max-width="500" height="300"/>
         </div>
         `;
   }
-  else if (`${post.video_url}` !== "") {
+  else if (post.type === "video") {
     return `
         <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
-          <p>${post.video_url}</p>
+          <h1>${post.title}</h1>
+          <h2>${dateParser(post.date)}</h2>
+          <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/${post.video_url}"
+          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+          </iframe>
         </div>
         `;
   }
-  else if (`${post.location.lon}` && `${post.location.lng}` !== "") {
+  else if (post.type === "location") {
     return `
         <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
+          <h1>${post.title}</h1>
+          <h2>${dateParser(post.date)}</h2>
           <iframe
             width="560"
             height="315"
@@ -142,7 +169,6 @@ function renderResult(post, index) {
         `;
   }
 }
-
 ///////////////////////////////////////////////////////////////////////////////
 
 $(window).on("scroll", function() {

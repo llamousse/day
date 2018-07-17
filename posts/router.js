@@ -8,8 +8,7 @@ const jsonParser = bodyParser.json();
 // YOU MIGHT NEED BODY PARSER ON POST PUT
 
 router.get("/", (req, res) => {
-  Post.find({}).sort('date')
-  // Post.find()
+  Post.find({}).sort({'date': -1})
   .then(posts => {
     res.json(posts.map(post => post.serialize()));
   })
