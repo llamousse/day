@@ -1,28 +1,27 @@
 var state = {
   type: "text"
+};
+
+function getId(url) {
+  var video_id = url.split("v=")[1];
+  var ampersandPosition = video_id.indexOf("&");
+  if (ampersandPosition != -1) {
+    video_id = video_id.substring(0, ampersandPosition);
+  }
+  return video_id;
 }
 
-function getId(url){
-    var video_id = url.split('v=')[1];
-    var ampersandPosition = video_id.indexOf('&');
-    if(ampersandPosition != -1) {
-      video_id = video_id.substring(0, ampersandPosition);
-    }
-	return video_id;
-}
-
-function dateParser (date) {
-
+function dateParser(date) {
   date = new Date(date);
 
   var options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
   };
 
-  return date.toLocaleDateString('en-US', options);
+  return date.toLocaleDateString("en-US", options);
 }
 
 // When you load the doc, get the posts
@@ -33,38 +32,28 @@ $(function() {
 // When someone fills the form and sends, create a post
 $("#submit-post").click(function(event) {
   postDataToApi();
-  $("#p-title").val("");
-  $("#p-date").val("");
-  $("#p-desc").val("");
-  $("#img-desc").val("");
-  $("#yt-desc").val("");
-  $("#gm-desc-lat").val("");
-  $("#gm-desc-lng").val("");
+  $(".post-field").val("");
 });
 
 function postDataToApi() {
-
   var post = {
     title: $("#p-title").val(),
-    date: new Date ($("#p-date").val()),
+    date: new Date($("#p-date").val()),
     description: $("#p-desc").val(),
     type: state.type
   };
 
   if (state.type === "text") {
     post.description = $("#p-desc").val();
-  }
-  else if (state.type === "video") {
+  } else if (state.type === "video") {
     post.video_url = getId($("#yt-desc").val());
-  }
-  else if (state.type === "image") {
+  } else if (state.type === "image") {
     post.image_url = $("#img-desc").val();
-  }
-  else {
+  } else {
     post.location = {
-        lat: $("#gm-lat").val(),
-        lng: $("#gm-lng").val()
-    }
+      lat: $("#gm-lat").val(),
+      lng: $("#gm-lng").val()
+    };
   }
 
   console.log(post);
@@ -115,67 +104,57 @@ function displayPostData(data) {
 }
 
 function renderResult(post, index) {
+  let postHTML = `
+  <div class="post-content" data-index="${index}">
+  <h1>${post.title}</h1>
+  <h2>${dateParser(post.date)}</h2>
+  `;
 
   if (post.type === "text") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.title}</h1>
-          <h2>${dateParser(post.date)}</h2>
-          <p>${post.description}</p>
-        </div>
-        `;
+    postHTML += `<p>${post.description}</p>`;
+  } else if (post.type === "image") {
+    postHTML += ` <img src="${post.image_url}" max-width="500" height="300"/>`;
+  } else if (post.type === "video") {
+    postHTML += `
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/${post.video_url}"
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+    `;
+  } else if (post.type === "location") {
+    postHTML += `
+      <iframe
+      width="560"
+      height="315"
+      frameborder="0"
+      scrolling="no"
+      marginheight="0"
+      marginwidth="0"
+      src="https://maps.google.com/maps?q=${post.location.lat},${
+      post.location.lng
+    }&hl=es;z=14&amp;output=embed">
+      </iframe>
+      <br />
+
+      <small>
+      <a href="https://maps.google.com/maps?q=${post.location.lat},${
+      post.location.lng
+    }&hl=es;z=14&amp;output=embed"
+      style="color:#0000FF;text-align:left"
+      target="_blank">
+      </a>
+      </small>
+    `;
   }
-  else if (post.type === "image") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.title}</h1>
-          <h2>${dateParser(post.date)}</h2>
-          <img src="${post.image_url}" max-width="500" height="300"/>
-        </div>
-        `;
-  }
-  else if (post.type === "video") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.title}</h1>
-          <h2>${dateParser(post.date)}</h2>
-          <iframe width="560" height="315"
-          src="https://www.youtube.com/embed/${post.video_url}"
-          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-          </iframe>
-        </div>
-        `;
-  }
-  else if (post.type === "location") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.title}</h1>
-          <h2>${dateParser(post.date)}</h2>
-          <iframe
-            width="560"
-            height="315"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-            src="https://maps.google.com/maps?q=${post.location.lat},${post.location.lng}&hl=es;z=14&amp;output=embed">
-           </iframe>
-           <br />
-           <small>
-             <a href="https://maps.google.com/maps?q=${post.location.lat},${post.location.lng}&hl=es;z=14&amp;output=embed"
-              style="color:#0000FF;text-align:left"
-              target="_blank"></a>
-           </small>
-        `;
-  }
+  postHTML += "</div>";
+  return postHTML;
 }
 ///////////////////////////////////////////////////////////////////////////////
 
 $(window).on("scroll", function() {
-  if($(window).scrollTop() > 350) {
+  if ($(window).scrollTop() > 350) {
     $(".home-nav").css("background-color", "#94806A");
-  }
-  else {
+  } else {
     $(".home-nav").css("background-color", "");
   }
 });
@@ -187,133 +166,120 @@ function toggleForm(form1, form2) {
   $(`#${form2}-form`).hide();
 }
 
-function togglePostForm(opt1, opt2, opt3, opt4) {
-  $(`#${opt1}`).css("background-color", "#B0E2F8");
-  $(`#${opt2}`).css("background-color", "#ffffff");
-  $(`#${opt3}`).css("background-color", "#ffffff");
-  $(`#${opt4}`).css("background-color", "#ffffff");
+function highlightType(highlight) {
+  $(".post-option-type").css("background-color", "#ffffff");
+  $(`#${highlight}`).css("background-color", "#B0E2F8");
 }
 
 function sideBarMenu() {
-  $('.sidebar-bg').toggleClass("hidden");
-  $('.sidebar-top').toggleClass("hidden");
+  $(".sidebar-bg").toggleClass("hidden");
+  $(".sidebar-top").toggleClass("hidden");
 
-  $(".sidebar-button").click(function(event){
-    $('.sidebar-bg').addClass("hidden");
-    $('.sidebar-top').addClass("hidden");
+  $(".sidebar-button").click(function(event) {
+    $(".sidebar-bg").addClass("hidden");
+    $(".sidebar-top").addClass("hidden");
   });
 }
 
 function loggedIn() {
-  $('.posts').removeClass("hidden");
-  $('.sidebar-bg').addClass("hidden");
-  $('.display-start').addClass("hidden");
-  $('.rectangle').addClass("hidden");
-  $('.about-section').addClass("hidden");
-  $('.bg-journal').removeClass("hidden");
-  $('.post-display').removeClass("hidden");
-  $('.foot-nav').addClass("hidden");
-  $('.foot-nav2').removeClass("hidden");
-  $('#text').css("background-color", "#B0E2F8");
-  $('.post-desc').removeClass("hidden");
+  $(".posts").removeClass("hidden");
+  $(".sidebar-bg").addClass("hidden");
+  $(".display-start").addClass("hidden");
+  $(".rectangle").addClass("hidden");
+  $(".about-section").addClass("hidden");
+  $(".bg-journal").removeClass("hidden");
+  $(".post-display").removeClass("hidden");
+  $(".foot-nav").addClass("hidden");
+  $(".foot-nav2").removeClass("hidden");
+  $("#text").css("background-color", "#B0E2F8");
+  $(".post-desc").removeClass("hidden");
 
-  $('.home-nav').on('click', '.sidebar-menu', function(event) {
+  $(".home-nav").on("click", ".sidebar-menu", function(event) {
     event.preventDefault();
-    $('.sidebar-button').hide();
-    $('.jsidebar-button').show();
+    $(".sidebar-button").hide();
+    $(".jsidebar-button").show();
   });
 
-  $('.jsidebar-button').click(function(event){
-    $('.sidebar-bg').addClass("hidden");
-    $('.sidebar-top').addClass("hidden");
+  $(".jsidebar-button").click(function(event) {
+    $(".sidebar-bg").addClass("hidden");
+    $(".sidebar-top").addClass("hidden");
   });
 }
 
 function loggedOut() {
-  $('.posts').addClass("hidden");
-  $('.sidebar-bg').toggleClass("hidden");
-  $('.display-start').removeClass("hidden");
-  $('.rectangle').removeClass("hidden");
-  $('.about-section').removeClass("hidden");
-  $('.bg-journal').addClass("hidden");
-  $('.post-display').addClass("hidden");
-  $('.foot-nav').removeClass("hidden");
-  $('.foot-nav2').addClass("hidden");
+  $(".posts").addClass("hidden");
+  $(".sidebar-bg").toggleClass("hidden");
+  $(".display-start").removeClass("hidden");
+  $(".rectangle").removeClass("hidden");
+  $(".about-section").removeClass("hidden");
+  $(".bg-journal").addClass("hidden");
+  $(".post-display").addClass("hidden");
+  $(".foot-nav").removeClass("hidden");
+  $(".foot-nav2").addClass("hidden");
 
-  $('.home-nav').on('click', '.sidebar-menu', function(event) {
+  $(".home-nav").on("click", ".sidebar-menu", function(event) {
     event.preventDefault();
-    $('.sidebar-button').show();
-    $('.jsidebar-button').hide();
+    $(".sidebar-button").show();
+    $(".jsidebar-button").hide();
   });
 
-  $('.jsidebar-button').click(function(event){
-    $('.sidebar-bg').addClass("hidden");
-    $('.sidebar-top').addClass("hidden");
+  $(".jsidebar-button").click(function(event) {
+    $(".sidebar-bg").addClass("hidden");
+    $(".sidebar-top").addClass("hidden");
   });
 
-  $('.sidebar-bg').toggleClass("hidden");
-  $('.jsidebar-button').addClass("hidden");
-  $('.sidebar-button').toggleClass("hidden");
+  $(".sidebar-bg").toggleClass("hidden");
+  $(".jsidebar-button").addClass("hidden");
+  $(".sidebar-button").toggleClass("hidden");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-$('.home-nav').on('click', '.sidebar-menu', function(event) {
+$(".home-nav").on("click", ".sidebar-menu", function(event) {
   event.preventDefault();
   sideBarMenu();
 });
-$('.rectangle').on('click', '.login', function(event) {
-   toggleForm("login", "signup");
+$(".rectangle").on("click", ".login", function(event) {
+  toggleForm("login", "signup");
 });
-$('.rectangle').on('click', '.signup', function(event) {
-   toggleForm("signup", "login");
+$(".rectangle").on("click", ".signup", function(event) {
+  toggleForm("signup", "login");
 });
-$('#sidebar-login').click(function(event) {
-   toggleForm("login", "signup");
+$("#sidebar-login").click(function(event) {
+  toggleForm("login", "signup");
 });
-$('#sidebar-signup').click(function(event) {
-   toggleForm("signup", "login");
+$("#sidebar-signup").click(function(event) {
+  toggleForm("signup", "login");
 });
-$('.submit-button').click(function(event) {
+$(".submit-button").click(function(event) {
   loggedIn();
 });
-$('#logout').click(function(event) {
+$("#logout").click(function(event) {
   loggedOut();
 });
 
-$('#yt').click(function(event) {
-  togglePostForm("yt", "img", "gm", "text");
+$("#yt").click(function(event) {
+  highlightType("yt");
   state.type = "video";
-  $('.img-desc').addClass("hidden");
-  $('.post-desc').addClass("hidden");
-  $('.gm-desc-lat').addClass("hidden");
-  $('.gm-desc-lng').addClass("hidden");
-  $('.yt-desc').removeClass("hidden");
+  $(".optional-field").addClass("hidden");
+  $("#yt-desc").removeClass("hidden");
 });
-$('#img').click(function(event) {
-  togglePostForm("img", "yt", "gm", "text");
+$("#img").click(function(event) {
+  highlightType("img");
   state.type = "image";
-  $('.img-desc').removeClass("hidden");
-  $('.post-desc').addClass("hidden");
-  $('.gm-desc-lat').addClass("hidden");
-  $('.gm-desc-lng').addClass("hidden");
-  $('.yt-desc').addClass("hidden");
+  $(".optional-field").addClass("hidden");
+  $("#img-desc").removeClass("hidden");
 });
-$('#gm').click(function(event) {
-  togglePostForm("gm", "img", "yt", "text");
+$("#gm").click(function(event) {
+  highlightType("gm");
   state.type = "maps";
-  $('.post-desc').addClass("hidden");
-  $('.gm-desc-lat').removeClass("hidden");
-  $('.gm-desc-lng').removeClass("hidden");
-  $('.yt-desc').addClass("hidden");
-  $('.img-desc').addClass("hidden");
+  $(".optional-field").addClass("hidden");
+  $("#gm-lat").removeClass("hidden");
+  $("#gm-lng").removeClass("hidden");
 });
-$('#text').click(function(event) {
-  togglePostForm("text", "img", "gm", "yt");
+$("#text").click(function(event) {
+  highlightType("text");
   state.type = "text";
-  $('.post-desc').removeClass("hidden");
-  $('.gm-desc-lat').addClass("hidden");
-  $('.gm-desc-lng').addClass("hidden");
-  $('.yt-desc').addClass("hidden");
-  $('.img-desc').addClass("hidden");
+  $(".optional-field").addClass("hidden");
+  $("#p-desc").removeClass("hidden");
 });

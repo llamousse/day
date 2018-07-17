@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   background: url("/images/homepage.jpg") no-repeat center;
   background-size: cover;
   width: 100%;
@@ -81,9 +81,9 @@ a {
   margin: 0 auto;
   margin-bottom: 100px;
   padding: 20px;
-  background: #94806A;
+  background: #94806a;
 }
-.section{
+.section {
   margin: 100px 0;
 }
 .field {
@@ -122,7 +122,7 @@ a {
 #login {
   font-size: 13px;
   height: 28px;
-  background-color: #B0E2F8;
+  background-color: #b0e2f8;
 }
 
 .search-form {
@@ -130,12 +130,14 @@ a {
 }
 
 form #sub:hover {
-  background-color: #B0E2F8;
+  background-color: #b0e2f8;
   cursor: pointer;
   outline: none;
 }
 
-.rectangle #login:focus, #signup:focus, input:focus {
+.rectangle #login:focus,
+#signup:focus,
+input:focus {
   outline: none;
 }
 
@@ -177,23 +179,24 @@ form #sub:hover {
 .foot-nav {
   margin-top: 30px;
   height: 65px;
-  background-color: #94806A;
+  background-color: #94806a;
 }
 
 .foot-nav2 {
   margin-top: 30px;
   height: 65px;
-  background-color: #94806A;
+  background-color: #94806a;
 }
 
-.contact-footer, .home-footer {
+.contact-footer,
+.home-footer {
   text-align: center;
   /* padding: 20px; */
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #94806A;
+  background-color: #94806a;
 
   height: 50px;
 }
@@ -205,13 +208,13 @@ form #sub:hover {
   width: 5%;
 }
 
-.sidebar-top{
+.sidebar-top {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   height: 65px;
-  background-color: #94806A;
+  background-color: #94806a;
   z-index: 2;
 }
 
@@ -220,7 +223,7 @@ form #sub:hover {
   width: 50%;
   max-width: 400px;
   min-width: 200px;
-  border: 2px solid #94806A;
+  border: 2px solid #94806a;
   position: fixed;
   top: 65px;
   font-size: 22px;
@@ -230,7 +233,7 @@ form #sub:hover {
 }
 
 .sidebar-bg p {
-  margin:0px;
+  margin: 0px;
   padding: 35px;
 }
 
@@ -243,7 +246,7 @@ form #sub:hover {
 .bg-journal {
   height: auto;
   width: 100%;
-  background-color: #94806A;
+  background-color: #94806a;
 }
 
 .journal {
@@ -271,15 +274,15 @@ form #sub:hover {
   width: 100%;
 }
 
-.post-desc {
-  height: 100px;
+.post-field {
+  height: 50px;
   width: 70%;
   outline: none;
   padding: 6px 5px 5px 10px;
   box-sizing: border-box;
 }
 
-.gm-desc-lat {
+.lat-lng {
   height: 50px;
   width: 35%;
   outline: none;
@@ -287,15 +290,8 @@ form #sub:hover {
   box-sizing: border-box;
 }
 
-.gm-desc-lng {
-  height: 50px;
-  width: 35%;
-  outline: none;
-  padding: 6px 5px 5px 10px;
-  box-sizing: border-box;
-}
-
-.yt-desc, .img-desc {
+.yt-desc,
+.img-desc {
   height: 50px;
   width: 70%;
   outline: none;
@@ -318,14 +314,14 @@ form #sub:hover {
   box-sizing: border-box;
 }
 
-.type{
+.type {
   color: black;
   width: 70%;
   height: 25px;
   margin: 25px auto;
 }
 
-.post-option-type{
+.post-option-type {
   width: 25%;
   box-sizing: border-box;
   height: 100%;
@@ -337,13 +333,16 @@ form #sub:hover {
   outline: none;
 }
 
-.type #yt:hover, #img:hover, #gm:hover, #text:hover {
-  background-color: #B0E2F8;
+.type #yt:hover,
+#img:hover,
+#gm:hover,
+#text:hover {
+  background-color: #b0e2f8;
   border: none;
 }
 
 .type #submit-post:hover {
-  background-color: #F1948A;
+  background-color: #f1948a;
   border: none;
 }
 
