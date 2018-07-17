@@ -110,6 +110,7 @@ describe("/api/posts", function() {
       const newPost = {
         title: "this is a post",
         description: "test test test",
+        type: "text",
         date: Date.now()
       };
 

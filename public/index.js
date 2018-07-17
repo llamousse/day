@@ -10,6 +10,9 @@ $(function() {
 // When someone fills the form and sends, create a post
 $("#submit-post").click(function(event) {
   postDataToApi();
+  document.getElementById("p-title").value = "";
+  document.getElementById("p-date").value = "";
+  document.getElementById("p-desc").value = "";
 });
 
 function postDataToApi() {
@@ -94,34 +97,45 @@ function renderResult(post, index) {
           <img src="${post.image_url}" width="300" height="300"/>
         </div>
         `;
-  }
-  else if (state.type === "image") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
-          <img src="${post.image_url}" width="300" height="300"/>
-        </div>
-        `;
+  // }
+  // else if (state.type === "image") {
+  //   return `
+  //       <div class="post-content" data-index="${index}">
+  //         <h1>${post.date}</h1>
+  //         <h2>${post.title}</h2>
+  //         <img src="${post.image_url}" width="300" height="300"/>
+  //       </div>
+  //       `;
   }
   else if (`${post.description}` !== "") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
-          <p>${post.description}</p>
-        </div>
-        `;
+    // if (state.type === "text") {
+      return `
+          <div class="post-content" data-index="${index}">
+            <h1>${post.date}</h1>
+            <h2>${post.title}</h2>
+            <p>${post.description}</p>
+          </div>
+          `;
+    // }
+    // else {
+    //   return `
+    //       <div class="post-content" data-index="${index}">
+    //         <h1>${post.date}</h1>
+    //         <h2>${post.title}</h2>
+    //         <p>${post.description}</p>
+    //       </div>
+    //       `;
+    // }
   }
-  else if (state.type === "text") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
-          <p>${post.description}</p>
-        </div>
-        `;
-  }
+  // else if (state.type === "text") {
+  //   return `
+  //       <div class="post-content" data-index="${index}">
+  //         <h1>${post.date}</h1>
+  //         <h2>${post.title}</h2>
+  //         <p>${post.description}</p>
+  //       </div>
+  //       `;
+  // }
   else if (`${post.video_url}` !== "") {
     return `
         <div class="post-content" data-index="${index}">
@@ -131,15 +145,15 @@ function renderResult(post, index) {
         </div>
         `;
   }
-  else if (state.type === "video") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
-          <p>${post.video_url}</p>
-        </div>
-        `;
-  }
+  // else if (state.type === "video") {
+  //   return `
+  //       <div class="post-content" data-index="${index}">
+  //         <h1>${post.date}</h1>
+  //         <h2>${post.title}</h2>
+  //         <p>${post.video_url}</p>
+  //       </div>
+  //       `;
+  // }
   else if (`${post.location.lon}` && `${post.location.lng}` !== "") {
     return `
         <div class="post-content" data-index="${index}">
@@ -162,28 +176,28 @@ function renderResult(post, index) {
            </small>
         `;
   }
-  else if (state.type === "location") {
-    return `
-        <div class="post-content" data-index="${index}">
-          <h1>${post.date}</h1>
-          <h2>${post.title}</h2>
-          <iframe
-            width="560"
-            height="315"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-            src="https://maps.google.com/maps?q=${post.location.lat},${post.location.lng}&hl=es;z=14&amp;output=embed">
-           </iframe>
-           <br />
-           <small>
-             <a href="https://maps.google.com/maps?q=${post.location.lat},${post.location.lng}&hl=es;z=14&amp;output=embed"
-              style="color:#0000FF;text-align:left"
-              target="_blank"></a>
-           </small>
-        `;
-  }
+  // else if (state.type === "location") {
+  //   return `
+  //       <div class="post-content" data-index="${index}">
+  //         <h1>${post.date}</h1>
+  //         <h2>${post.title}</h2>
+  //         <iframe
+  //           width="560"
+  //           height="315"
+  //           frameborder="0"
+  //           scrolling="no"
+  //           marginheight="0"
+  //           marginwidth="0"
+  //           src="https://maps.google.com/maps?q=${post.location.lat},${post.location.lng}&hl=es;z=14&amp;output=embed">
+  //          </iframe>
+  //          <br />
+  //          <small>
+  //            <a href="https://maps.google.com/maps?q=${post.location.lat},${post.location.lng}&hl=es;z=14&amp;output=embed"
+  //             style="color:#0000FF;text-align:left"
+  //             target="_blank"></a>
+  //          </small>
+  //       `;
+  // }
 }
 
 // NEED IF ELSE + EMBED LINKS
