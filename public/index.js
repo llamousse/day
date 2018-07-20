@@ -1,3 +1,20 @@
+var state = {
+  token: "",
+  type: "text"
+};
+
+// When you load the doc, get the posts
+$(function() {
+
+  state.token = localStorage.getItem('token');
+  if (state.token) {
+    loggedIn();
+  }
+
+
+});
+
+
 $('.submit-signup').on('click', function(event) {
 
 	event.preventDefault();
@@ -19,14 +36,14 @@ $('.submit-signup').on('click', function(event) {
     contentType: "application/json",
     type: "POST",
     success: function(data) {
-      alert('Success! Please log in.');
-
+      console.log(data);
+      toggleForm("login", "signup");
 
     },
 		error: function(error) {
 			let errorLocation = error.responseJSON.location;
 			let errorMessage = error.responseJSON.message;
-			$('.error-message').html(`Error: ${errorLocation}: ${errorMessage}`);
+			$('.signup-error').html(`Error: ${errorLocation}: ${errorMessage}`);
 			console.log('error', error);
 		}
 	};
@@ -39,9 +56,10 @@ $('.submit-signup').on('click', function(event) {
 $(".submit-login").on('click', function(event) {
 
   event.preventDefault();
-  const email = $('email').val();
-  const password = $('password').val();
-
+  const email = $('#login-email').val();
+  const password = $('#login-password').val();
+  console.log(email);
+  console.log(password);
   const settings = {
     url: "/api/auth/login",
     data: JSON.stringify({
@@ -54,10 +72,11 @@ $(".submit-login").on('click', function(event) {
     success: function(data) {
       console.log(data.authToken);
       localStorage.setItem('token', data.authToken);
+      loggedIn();
     },
     error: function(error) {
       let errorMessage = "Username or Password is incorrect.";
-      $('.error-message').html(`${errorMessage}`);
+      $('.login-error').html(`${errorMessage}`);
       console.log("error", error);
     }
   };
@@ -66,15 +85,14 @@ $(".submit-login").on('click', function(event) {
 
 });
 
-
-
+$("#logout").click(function(event) {
+  loggedOut();
+  localStorage.setItem('token', "");
+  state.token = "";
+});
 
 
 ////////////////////////////////////////////////////////////////////////////
-
-var state = {
-  type: "text"
-};
 
 function getId(url) {
   var video_id = url.split("v=")[1];
@@ -97,11 +115,6 @@ function dateParser(date) {
 
   return date.toLocaleDateString("en-US", options);
 }
-
-// When you load the doc, get the posts
-$(function() {
-  getDataFromApi();
-});
 
 // When someone fills the form and sends, create a post
 $("#submit-post").click(function(event) {
@@ -138,6 +151,9 @@ function postDataToApi() {
     dataType: "json",
     contentType: "application/json",
     type: "POST",
+    headers: {
+      "Authorization": `Bearer ${state.token}`
+    },
     success: function(data) {
       console.log(data);
       getDataFromApi();
@@ -154,6 +170,9 @@ function getDataFromApi() {
     url: "/api/posts",
     dataType: "json",
     type: "GET",
+    headers: {
+      "Authorization": `Bearer ${state.token}`
+    },
     success: function(data) {
       console.log(data);
       displayPostData(data);
@@ -255,6 +274,7 @@ function sideBarMenu() {
 }
 
 function loggedIn() {
+  getDataFromApi();
   $(".posts").removeClass("hidden");
   $(".sidebar-bg").addClass("hidden");
   $(".display-start").addClass("hidden");
@@ -320,15 +340,6 @@ $("#sidebar-login").click(function(event) {
 $("#sidebar-signup").click(function(event) {
   toggleForm("signup", "login");
 });
-
-// $(".submit-button").click(function(event) {
-//   loggedIn();
-// });
-//
-// $("#logout").click(function(event) {
-//   loggedOut();
-// });
-//////////////////////////////////////////////////
 
 $("#yt").click(function(event) {
   highlightType("yt");
