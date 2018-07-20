@@ -1,136 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <meta name="description" content="Remember all the good times and plan adventures with the blog planner app Day!">
-  <title>Day</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:200|Open+Sans:300" rel="stylesheet">
-  <link href="index.css" rel="stylesheet" type="text/css"/>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Remember all the good times and plan adventures with the blog planner app Day!">
+    <title>Day</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200|Open+Sans:300" rel="stylesheet">
+    <link href="index.css" rel="stylesheet" type="text/css"/>
+  </head>
 
-<body>
+  <body>
 
-  <main role="main" aria-live="assertive" id= "main">
+    <div class="wrapper">
 
-    <div class="home-nav sidebar lines">
-      <a href="#" class="sidebar-menu">
-        <img src="/images/sidebar-icon.png"/>
-      </a>
-      <a href="#" class="day">Day</a>
-      <a href="#" class="logo">
-        <img src="/images/logo-icon.jpg"/>
-      </a>
-    </div>
+      <main role="main" aria-live="assertive" id= "main">
 
-    <div class="display-start">
-      <p>Day in the Life :</p>
-      <p>Share Your Story</p>
-    </div>
+        <div class="home-nav sidebar lines">
+          <a href="#" class="sidebar-menu">
+            <img src="/images/sidebar-icon.png"/>
+          </a>
+          <a href="#" class="day">Day</a>
+          <a href="#" class="logo">
+            <img src="/images/logo-icon.jpg"/>
+          </a>
+        </div>
 
-    <div class="rectangle">
-      <button type="submit" class="field side-align login" id="login">Log In</button>
-      <button type="submit" class="field side-align signup" id="signup">Sign Up</button>
-      <form action="#" class="" id="signup-form" hidden>
-        <input type="text" placeholder="First Name" class="field" id="firstname" required>
-        <input type="text" placeholder="Last Name" class="field" id="lastname" required>
-        <input type="text" placeholder="Email Address" class="field" id="email" required>
-        <input type="text" placeholder="Password" class="field" id="password" required>
-        <button type="submit" class="field submit-button" id="sub">Submit</button>
-      </form>
-      <form action="#" class="" id="login-form">
-        <input type="text" placeholder="Email Address" class="field" id="email" required>
-        <input type="text" placeholder="Password" class="field" id="password" required>
-        <button type="submit" class="field submit-button" id="sub">Submit</button>
-      </form>
-    </div>
+        <div class="display-start">
+          <p>Day in the Life :</p>
+          <p>Share Your Story</p>
+        </div>
 
-  </main>
+        <div class="rectangle">
+          <button type="submit" class="field side-align login" id="login">Log In</button>
+          <button type="submit" class="field side-align signup" id="signup">Sign Up</button>
+          <form action="#" class="" id="signup-form" hidden>
+            <input type="text" placeholder="First Name" class="field" id="firstname" required>
+            <input type="text" placeholder="Last Name" class="field" id="lastname" required>
+            <input type="text" placeholder="Email Address" class="field" id="email" required>
+            <input type="text" placeholder="Password" class="field" id="password" required>
+            <div align="center"><button type="submit" class="field submit-button submit-signup" id="sub">Submit</button></div>
+          </form>
+          <form action="#" class="" id="login-form">
+            <input type="text" placeholder="Email Address" class="field" id="email" required>
+            <input type="text" placeholder="Password" class="field" id="password" required>
+            <div align="center"><button type="submit" class="field submit-button submit-login" id="sub">Submit</button></div>
+          </form>
+        </div>
 
-  <section class="about-section" id="about-section">
+      </main>
 
-    <div id="about" class="section">
-      <p class="about-title" >What is Day?</p>
-      <p class="about-detail">Day is an interactive journal to memorialize your adventures and thoughts. Integrate videos, images, and maps.</p>
-      <img class="img-sze post-icons" src ="/images/homepage-video.jpg"/>
-      <img class="img-sze post-icons" src="/images/homepage-maps.png"/>
-      <img class="img-sze post-icons" src="/images/homepage-image.png"/>
-      <p class="about-title">Post Integration</p>
-      <p class="about-detail" id="coming-soon">Add YouTube videos, Google Maps, and images to your posts.</p>
-    </div>
+      <section role="region" class="about-section" id="about-section">
 
-    <div class="section">
-      <p class="about-title">Coming Soon</p>
-      <img class="ig-icon" src="/images/homepage-instagram.jpg"/>
-      <p class="about-title">Instagram Post</p>
-      <p class="about-detail">Add posts from Instagram to your journal.</p>
-      <img class="img-sze post-icons" src="/images/homepage-planner.jpg"/>
-      <p class="about-title">Planner</p>
-      <p class="about-detail">Plan future events and add your scheduled adventures to your journal.</p>
-    </div>
-  </section>
+        <div id="about" class="section">
+          <p class="about-title" >What is Day?</p>
+          <p class="about-detail">Day is an interactive journal to memorialize your adventures and thoughts. Integrate videos, images, and maps.</p>
+          <img class="img-sze post-icons" src ="/images/homepage-video.jpg"/>
+          <img class="img-sze post-icons" src="/images/homepage-maps.png"/>
+          <img class="img-sze post-icons" src="/images/homepage-image.png"/>
+          <p class="about-title">Post Integration</p>
+          <p class="about-detail">Add YouTube videos, Google Maps, and images to your posts.</p>
 
-  <div class="home-footer">
-    <p>© 2018 Vicky Yue</p>
-  </div>
+          <p class="about-title" id="coming-soon">Coming Soon</p>
+          <img class="ig-icon" src="/images/homepage-instagram.jpg"/>
+          <p class="about-title">Instagram Post</p>
+          <p class="about-detail">Add posts from Instagram to your journal.</p>
+          <img class="img-sze post-icons" src="/images/homepage-planner.jpg"/>
+          <p class="about-title">Planner</p>
+          <p class="about-detail">Plan future events and add your scheduled adventures to your journal.</p>
+        </div>
 
-  <div class="sidebar-top hidden"></div>
-  <div class="sidebar-bg hidden">
-    <div>
-      <a class="sidebar-button" href="#about-section"><p>About</p></a>
-      <a class="sidebar-button" href="#coming-soon"><p>Coming Soon</p></a>
-      <a class="sidebar-button" id="sidebar-login" href="#main"><p>Log In</p></a>
-      <a class="sidebar-button" id="sidebar-signup" href="#main"><p>Sign Up</p></a>
+      </section>
 
-      <a class="jsidebar-button hidden" id="logout" href="#"><p>Log Out</p></a>
-      <a class="jsidebar-button hidden" id="jsidebar-posts" href="#yt"><p>Journal Posts</p></a>
+      <div class="sidebar-top hidden"></div>
+      <div class="sidebar-bg hidden">
+        <div>
+          <a class="sidebar-button" href="#about-section"><p>About</p></a>
+          <a class="sidebar-button" href="#coming-soon"><p>Coming Soon</p></a>
+          <a class="sidebar-button" id="sidebar-login" href="#main"><p>Log In</p></a>
+          <a class="sidebar-button" id="sidebar-signup" href="#main"><p>Sign Up</p></a>
 
-    </div>
-  </div>
-
-  <div class="bg-journal hidden">
-    <div class="journal">
-
-      <h1>How's Your Day Today?</h1>
-
-      <div class="post-rectangle">
-        <form action="#" class="journal-field" id="post-head">
-          <input type="text" placeholder="Title:" class="post-title post-field" id="p-title" required>
-          <input type="date" placeholder="Date:" class="post-date post-field" id="p-date" required>
-
-
-          <div class="type">
-            <div class="post-option-type" id="yt">Video</div>
-            <div class="post-option-type" id="img">Image</div>
-            <div class="post-option-type" id="gm">Maps</div>
-            <div class="post-option-type" id="text">Text</div>
-          </div>
-
-          <textarea class="post-field optional-field" placeholder="Enter Text:" id="p-desc"></textarea>
-          <input    class="post-field optional-field lat-lng hidden" type="text" placeholder="Enter Latitude Coordinate:" id="gm-lat">
-          <input    class="post-field optional-field lat-lng hidden" type="text" placeholder="Enter Longitude Coordinate:"  id="gm-lng">
-          <textarea class="post-field optional-field hidden" placeholder="Enter Image URL:" id="img-desc"></textarea>
-          <textarea class="post-field optional-field hidden" placeholder="Enter YouTube URL:" id="yt-desc"></textarea>
-
-          <div class="type">
-            <div class="post-option-type" id="submit-post">Post</div>
-          </div>
-      </form>
-
+          <a class="jsidebar-button hidden" id="logout" href="#"><p>Log Out</p></a>
+          <a class="jsidebar-button hidden" id="jsidebar-posts" href="#yt"><p>Journal Posts</p></a>
+        </div>
       </div>
 
+      <div class="bg-journal hidden">
+        <div class="journal">
+
+          <h1>How's Your Day Today?</h1>
+
+          <div class="post-rectangle">
+            <form action="#" class="journal-field" id="post-head">
+              <input type="text" placeholder="Title:" class="post-title post-field" id="p-title" required>
+              <input type="date" placeholder="Date:" class="post-date post-field" id="p-date" required>
+
+              <div class="type">
+                <div class="post-option-type" id="yt">Video</div>
+                <div class="post-option-type" id="img">Image</div>
+                <div class="post-option-type" id="gm">Maps</div>
+                <div class="post-option-type" id="text">Text</div>
+              </div>
+
+              <textarea class="post-field optional-field" placeholder="Enter Text:" id="p-desc"></textarea>
+              <input    class="post-field optional-field lat-lng hidden" type="text" placeholder="Enter Latitude Coordinate:" id="gm-lat">
+              <input    class="post-field optional-field lat-lng hidden" type="text" placeholder="Enter Longitude Coordinate:"  id="gm-lng">
+              <textarea class="post-field optional-field hidden" placeholder="Enter Image URL:" id="img-desc"></textarea>
+              <textarea class="post-field optional-field hidden" placeholder="Enter YouTube URL:" id="yt-desc"></textarea>
+
+              <div class="type">
+                <div class="post-option-type" id="submit-post">Post</div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="posts hidden" id="journal-posts"></div>
+
     </div>
-  </div>
 
-  <div class="posts hidden" id="journal-posts"></div>
+    <footer role="contentInfo">
+        <p class="contact-footer">&copy; 2018 Vicky Yue</p>
+    </footer>
 
-  <div class="home-footer hidden">
-    <p class="contact-footer">© 2018 Vicky Yue</p>
-  </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="index.js" type="text/javascript"></script>
+    <!-- <script src="login.js" type="text/javascript"></script> -->
+    <!-- <script src="signup.js" type="text/javascript"></script> -->
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="index.js"></script>
-
-</body>
+  </body>
 </html>

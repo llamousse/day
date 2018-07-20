@@ -1,3 +1,77 @@
+$('.submit-signup').on('click', function(event) {
+
+	event.preventDefault();
+
+	const firstName = $('#firstname').val();
+	const lastName = $('#lastname').val();
+	const email = $('#email').val();
+	const password = $('#password').val();
+
+	const settings = {
+		url: "/api/users",
+		data: JSON.stringify({
+			email,
+			password,
+			firstName,
+			lastName
+		}),
+    dataType: "json",
+    contentType: "application/json",
+    type: "POST",
+    success: function(data) {
+      alert('Success! Please log in.');
+
+
+    },
+		error: function(error) {
+			let errorLocation = error.responseJSON.location;
+			let errorMessage = error.responseJSON.message;
+			$('.error-message').html(`Error: ${errorLocation}: ${errorMessage}`);
+			console.log('error', error);
+		}
+	};
+
+  $.ajax(settings);
+
+});
+
+///////////////////////////////////////////
+$(".submit-login").on('click', function(event) {
+
+  event.preventDefault();
+  const email = $('email').val();
+  const password = $('password').val();
+
+  const settings = {
+    url: "/api/auth/login",
+    data: JSON.stringify({
+      email,
+      password
+    }),
+    dataType: "json",
+    contentType: "application/json",
+    type: "POST",
+    success: function(data) {
+      console.log(data.authToken);
+      localStorage.setItem('token', data.authToken);
+    },
+    error: function(error) {
+      let errorMessage = "Username or Password is incorrect.";
+      $('.error-message').html(`${errorMessage}`);
+      console.log("error", error);
+    }
+  };
+
+  $.ajax(settings);
+
+});
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
 var state = {
   type: "text"
 };
@@ -121,7 +195,7 @@ function renderResult(post, index) {
     frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
     </iframe>
     `;
-  } else if (post.type === "location") {
+  } else if (post.type === "maps") {
     postHTML += `
       <iframe
       width="560"
@@ -130,16 +204,14 @@ function renderResult(post, index) {
       scrolling="no"
       marginheight="0"
       marginwidth="0"
-      src="https://maps.google.com/maps?q=${post.location.lat},${
-      post.location.lng
-    }&hl=es;z=14&amp;output=embed">
+      src="https://maps.google.com/maps?q=${post.location.lat},
+      ${post.location.lng}&hl=es;z=14&amp;output=embed">
       </iframe>
       <br />
 
       <small>
-      <a href="https://maps.google.com/maps?q=${post.location.lat},${
-      post.location.lng
-    }&hl=es;z=14&amp;output=embed"
+      <a href="https://maps.google.com/maps?q=${post.location.lat},
+      ${post.location.lng}&hl=es;z=14&amp;output=embed"
       style="color:#0000FF;text-align:left"
       target="_blank">
       </a>
@@ -149,6 +221,7 @@ function renderResult(post, index) {
   postHTML += "</div>";
   return postHTML;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 
 $(window).on("scroll", function() {
@@ -189,8 +262,6 @@ function loggedIn() {
   $(".about-section").addClass("hidden");
   $(".bg-journal").removeClass("hidden");
   $(".post-display").removeClass("hidden");
-  $(".foot-nav").addClass("hidden");
-  $(".foot-nav2").removeClass("hidden");
   $("#text").css("background-color", "#B0E2F8");
   $(".post-desc").removeClass("hidden");
 
@@ -214,8 +285,6 @@ function loggedOut() {
   $(".about-section").removeClass("hidden");
   $(".bg-journal").addClass("hidden");
   $(".post-display").addClass("hidden");
-  $(".foot-nav").removeClass("hidden");
-  $(".foot-nav2").addClass("hidden");
 
   $(".home-nav").on("click", ".sidebar-menu", function(event) {
     event.preventDefault();
@@ -251,12 +320,15 @@ $("#sidebar-login").click(function(event) {
 $("#sidebar-signup").click(function(event) {
   toggleForm("signup", "login");
 });
-$(".submit-button").click(function(event) {
-  loggedIn();
-});
-$("#logout").click(function(event) {
-  loggedOut();
-});
+
+// $(".submit-button").click(function(event) {
+//   loggedIn();
+// });
+//
+// $("#logout").click(function(event) {
+//   loggedOut();
+// });
+//////////////////////////////////////////////////
 
 $("#yt").click(function(event) {
   highlightType("yt");
