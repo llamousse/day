@@ -1,35 +1,36 @@
 "use strict";
 const express = require("express");
+const passport = require('passport');
 const bodyParser = require("body-parser");
 const { Post } = require("./models");
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
-// YOU MIGHT NEED BODY PARSER ON POST PUT
+const jwtAuth = passport.authenticate("jwt", { session: false });
 
-router.get("/", (req, res) => {
-  Post.find({}).sort({'date': -1})
+router.get("/", jwtAuth, (req, res) => {
+  Post.find({user: req.user.id}).sort({'date': -1})
   .then(posts => {
     res.json(posts.map(post => post.serialize()));
   })
   .catch(err => {
     console.error(err);
-    res.status(500).json({ error: "something went terribly wrong" });
+    res.status(500).json({ error: "something went wrong" });
   });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", jwtAuth, (req, res) => {
   Post.findById(req.params.id)
     .then(post => {
       res.json(post.serialize())
     })
     .catch(err => {
       console.error(err);
-      res.status(500).json({ error: "something went horribly awry" });
+      res.status(500).json({ error: "something went wrong" });
     });
 });
 
-router.post("/", jsonParser, (req, res) => {
+router.post("/", jwtAuth, jsonParser, (req, res) => {
   const requiredFields = ["title", "date", "type"];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -47,7 +48,8 @@ router.post("/", jsonParser, (req, res) => {
     type: req.body.type,
     image_url: req.body.image_url,
     video_url: req.body.video_url,
-    location: req.body.location
+    location: req.body.location,
+    user: req.user.id
   })
     .then(Post => res.status(201).json(Post.serialize()))
     .catch(err => {
@@ -56,7 +58,7 @@ router.post("/", jsonParser, (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", jwtAuth, (req, res) => {
   Post.findByIdAndRemove(req.params.id)
     .then(() => {
       res.status(204).json({ message: "success" });
@@ -67,7 +69,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.put("/:id", jsonParser, (req, res) => {
+router.put("/:id", jwtAuth, jsonParser, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: "Request path id and request body id values must match"

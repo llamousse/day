@@ -1,4 +1,5 @@
 'use strict';
+
 const {Post} = require('./models');
 const {router} = require('./router');
 

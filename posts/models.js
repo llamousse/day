@@ -24,7 +24,8 @@ const PostSchema = mongoose.Schema({
   location: {
     lat: { type: String, default: "" },
     lng: { type: String, default: "" }
-  }
+  },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 PostSchema.methods.serialize = function() {
