@@ -6,7 +6,7 @@ html, body {
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: url("/images/homepage.jpg") no-repeat center center fixed;
+  background: url("/images/first-login.jpg") no-repeat center center fixed;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -22,6 +22,11 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.login-error {
+  margin: 0 auto;
+  color: white;
 }
 
 /* LOAD PAGE - NAV BAR */
@@ -149,7 +154,7 @@ input:focus {
 
 /* LOAD PAGE - ABOUT SECTION */
 .about-section {
-  margin: 0px;
+  margin: 0;
   text-align: center;
   background-color: white;
   padding-top: 50px;
@@ -165,10 +170,12 @@ input:focus {
   margin: 0 auto;
   text-align: center;
   font-size: 22px;
+  margin-bottom: 30px;
 }
 
 #coming-soon {
-  margin-top: 80px;
+  /* margin-top: 80px; */
+  margin-top: 30px;
 }
 
 .img-sze {
@@ -180,11 +187,15 @@ input:focus {
   margin-right: 15px;
   max-width: 15%;
   max-height: 100px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .ig-icon {
   max-width: 25%;
   max-height: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .contact-footer {
@@ -246,9 +257,6 @@ footer {
   text-align: center;
   display: block;
   margin: 0 auto;
-
-  /* height: 100%; */
-  /* padding: 50px; */
   padding: 70px;
 }
 
@@ -346,7 +354,15 @@ footer {
 
 .posts {
   background-color: white;
-  height: 100%;
+  text-align: center;
+  height: 51.5%;
+  width: 100%;
+  margin: 0 auto;
+}
+.posts h2 {
+  margin: 0 auto;
+  /* padding: 10px; */
+  /* margin-top: 50px; */
 }
 .post-content h1 {
   margin-top: 30px;
@@ -356,7 +372,6 @@ footer {
   margin-bottom: 30px;
 }
 .post-content {
-  /* padding: 15px 90px 45px 70px; */
   padding: 15px 90px 5px 70px;
   text-align: center;
 }

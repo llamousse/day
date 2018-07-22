@@ -4,16 +4,36 @@ var state = {
 };
 
 // When you load the doc, get the posts
-$(function() {
-
+$(function () {
   state.token = localStorage.getItem('token');
   if (state.token) {
     loggedIn();
   }
-
-
 });
 
+function getId(url) {
+  var video_id = url.split("v=")[1];
+  var ampersandPosition = video_id.indexOf("&");
+  if (ampersandPosition != -1) {
+    video_id = video_id.substring(0, ampersandPosition);
+  }
+  return video_id;
+}
+
+function dateParser(date) {
+  date = new Date(date);
+
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  };
+
+  return date.toLocaleDateString("en-US", options);
+}
+
+///////////////////////// SIGN UP / LOG IN-OUT /////////////////////////////
 
 $('.submit-signup').on('click', function(event) {
 
@@ -38,7 +58,6 @@ $('.submit-signup').on('click', function(event) {
     success: function(data) {
       console.log(data);
       toggleForm("login", "signup");
-
     },
 		error: function(error) {
 			let errorLocation = error.responseJSON.location;
@@ -52,14 +71,15 @@ $('.submit-signup').on('click', function(event) {
 
 });
 
-///////////////////////////////////////////
 $(".submit-login").on('click', function(event) {
 
   event.preventDefault();
   const email = $('#login-email').val();
   const password = $('#login-password').val();
+  const id =
   console.log(email);
   console.log(password);
+
   const settings = {
     url: "/api/auth/login",
     data: JSON.stringify({
@@ -72,10 +92,11 @@ $(".submit-login").on('click', function(event) {
     success: function(data) {
       console.log(data.authToken);
       localStorage.setItem('token', data.authToken);
+      console.log(state.token);
       loggedIn();
     },
     error: function(error) {
-      let errorMessage = "Username or Password is incorrect.";
+      let errorMessage = "Email or Password is incorrect.";
       $('.login-error').html(`${errorMessage}`);
       console.log("error", error);
     }
@@ -86,41 +107,19 @@ $(".submit-login").on('click', function(event) {
 });
 
 $("#logout").click(function(event) {
-  loggedOut();
   localStorage.setItem('token', "");
   state.token = "";
+  console.log(state.token);
+  loggedOut();
 });
-
-
-////////////////////////////////////////////////////////////////////////////
-
-function getId(url) {
-  var video_id = url.split("v=")[1];
-  var ampersandPosition = video_id.indexOf("&");
-  if (ampersandPosition != -1) {
-    video_id = video_id.substring(0, ampersandPosition);
-  }
-  return video_id;
-}
-
-function dateParser(date) {
-  date = new Date(date);
-
-  var options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  };
-
-  return date.toLocaleDateString("en-US", options);
-}
 
 // When someone fills the form and sends, create a post
 $("#submit-post").click(function(event) {
   postDataToApi();
   $(".post-field").val("");
 });
+
+///////////////////////// GET DATA / POST DATA API /////////////////////
 
 function postDataToApi() {
   var post = {
@@ -184,6 +183,8 @@ function getDataFromApi() {
   $.ajax(settings);
 }
 
+/////////////////////DISPLAY AND RENDER POSTS///////////////////////////
+
 function displayPostData(data) {
   var results = data.map((post, index) => {
     return renderResult(post, index);
@@ -192,7 +193,9 @@ function displayPostData(data) {
   if (results.length > 0) {
     $(".posts").html(results);
   } else {
-    $(".posts").html(`<h2>No results found.</h2>`);
+    $(".posts").html(`<h2 class="first-post">Welcome to Day! Submit your first post to start building your journal.</h2>`);
+    $(".posts").css("height", "540px");
+    $(".first-post").css("padding", "50px 10px 0px 10px");
   }
 }
 
@@ -241,7 +244,7 @@ function renderResult(post, index) {
   return postHTML;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+///////////////////////// EVENT LISTENER FUNCTIONS //////////////////////
 
 $(window).on("scroll", function() {
   if ($(window).scrollTop() > 350) {
@@ -283,7 +286,6 @@ function loggedIn() {
   $(".bg-journal").removeClass("hidden");
   $(".post-display").removeClass("hidden");
   $("#text").css("background-color", "#B0E2F8");
-  $(".post-desc").removeClass("hidden");
 
   $(".home-nav").on("click", ".sidebar-menu", function(event) {
     event.preventDefault();
@@ -304,7 +306,6 @@ function loggedOut() {
   $(".rectangle").removeClass("hidden");
   $(".about-section").removeClass("hidden");
   $(".bg-journal").addClass("hidden");
-  $(".post-display").addClass("hidden");
 
   $(".home-nav").on("click", ".sidebar-menu", function(event) {
     event.preventDefault();
@@ -321,8 +322,6 @@ function loggedOut() {
   $(".jsidebar-button").addClass("hidden");
   $(".sidebar-button").toggleClass("hidden");
 }
-
-///////////////////////////////////////////////////////////////////////////////
 
 $(".home-nav").on("click", ".sidebar-menu", function(event) {
   event.preventDefault();
@@ -347,12 +346,14 @@ $("#yt").click(function(event) {
   $(".optional-field").addClass("hidden");
   $("#yt-desc").removeClass("hidden");
 });
+
 $("#img").click(function(event) {
   highlightType("img");
   state.type = "image";
   $(".optional-field").addClass("hidden");
   $("#img-desc").removeClass("hidden");
 });
+
 $("#gm").click(function(event) {
   highlightType("gm");
   state.type = "maps";
@@ -360,6 +361,7 @@ $("#gm").click(function(event) {
   $("#gm-lat").removeClass("hidden");
   $("#gm-lng").removeClass("hidden");
 });
+
 $("#text").click(function(event) {
   highlightType("text");
   state.type = "text";
