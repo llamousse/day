@@ -140,7 +140,13 @@ a {
   text-align: center;
 }
 
-form #sub:hover {
+form #sub-signup:hover {
+  background-color: #b0e2f8;
+  cursor: pointer;
+  outline: none;
+}
+
+form #sub-login:hover {
   background-color: #b0e2f8;
   cursor: pointer;
   outline: none;
