@@ -492,6 +492,10 @@ footer {
     padding: 70px 25px 10px;
   }
 
+  .post-content {
+    padding: 15px 70px 30px 70px;
+  }
+
   .post-content img {
     margin: 0 auto;
     margin-bottom: 0px;
