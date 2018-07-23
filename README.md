@@ -1,22 +1,28 @@
-# TODOs:
+# Day
+A responsive website that displays a user-friendly journal, allowing users to document their day utilizing text, images, Google Maps (https://maps.google.com/), and YouTube (https://www.youtube.com/) videos.
 
-1. CSS styling for logged in posts
-1. CSS styling for new user logged in
-1. Accessibility
-1. README
+## Screenshots
+Home Page / Display Screen:
 
+![Day Homepage Part 1](/public/images/homepage-1.png)
+![Day Homepage Part 2](/public/images/homepage-2.png)
 
-### authentication for sign up / log in
-DONE
-1.  POST for signup [show errors, show login]
-1.  POST for login [show errors, show posts]
-    - save token on localStorage -> localStorage.setItem('token', authToken);
-1.  On doc ready check for token var token localStorage.getItem('token');
-    - if you have the token, show day.
-1.  logout -> delete token from localStorage
+First Login (Mobile) & Post Example (Laptop)
 
-# DONE:
+![Day First Login](/public/images/first-login.png)
+![Day Desktop Post Example](/public/images/posts-desktop.png)
 
-1.  display image/video/maps post from URL - DONE
-1.  $ajax POST request on public/index.js to display new posts - DONE
-1.  CSS style for Posts - DONE
+## Introduction
+Day gives users the ability to share their day in a journal where they can fully express themselves through text, images, maps, and videos.
+
+## Features
+* Create a personal account to document adventures
+* Post videos, images, maps, and texts
+* Authentication to protect user information
+
+## Live Site
+Experience Day at: https://mighty-dawn-17049.herokuapp.com/
+
+## Technical
+* Fully responsive
+* Built using HTML5, CSS, JavaScript, jQuery, Node.js, Express, Heroku

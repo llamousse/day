@@ -248,7 +248,7 @@ function renderResult(post, index) {
 ///////////////////////// EVENT LISTENER FUNCTIONS //////////////////////
 
 $(window).on("scroll", function() {
-  if ($(window).scrollTop() > 350) {
+  if ($(window).scrollTop() > 300) {
     $(".home-nav").css("background-color", "#94806A");
   } else {
     $(".home-nav").css("background-color", "");
