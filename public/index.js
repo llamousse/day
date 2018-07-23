@@ -33,8 +33,7 @@ function dateParser(date) {
   return date.toLocaleDateString("en-US", options);
 }
 
-///////////////////////// SIGN UP / LOG IN-OUT /////////////////////////////
-
+// SIGN UP / LOG IN-OUT
 $('.submit-signup').on('click', function(event) {
 
 	event.preventDefault();
@@ -113,13 +112,13 @@ $("#logout").click(function(event) {
   loggedOut();
 });
 
-// When someone fills the form and sends, create a post
+// When user fills the form and sends, create a post
 $("#submit-post").click(function(event) {
   postDataToApi();
   $(".post-field").val("");
 });
 
-///////////////////////// GET DATA / POST DATA API /////////////////////
+// GET DATA / POST DATA API
 
 function postDataToApi() {
   var post = {
@@ -183,7 +182,7 @@ function getDataFromApi() {
   $.ajax(settings);
 }
 
-/////////////////////DISPLAY AND RENDER POSTS///////////////////////////
+// DISPLAY AND RENDER POSTS
 
 function displayPostData(data) {
   var results = data.map((post, index) => {
@@ -194,7 +193,6 @@ function displayPostData(data) {
     $(".posts").html(results);
   } else {
     $(".posts").html(`<h2 class="first-post">Welcome to Day! Submit your first post to start building your journal.</h2>`);
-    // $(".posts").css("height", "540px");
     $(".first-post").css("height", "540px");
     $(".first-post").css("padding", "50px 15px 0px 15px");
   }
@@ -245,7 +243,7 @@ function renderResult(post, index) {
   return postHTML;
 }
 
-///////////////////////// EVENT LISTENER FUNCTIONS //////////////////////
+// EVENT LISTENER FUNCTIONS
 
 $(window).on("scroll", function() {
   if ($(window).scrollTop() > 300) {
