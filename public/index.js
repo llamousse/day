@@ -194,8 +194,9 @@ function displayPostData(data) {
     $(".posts").html(results);
   } else {
     $(".posts").html(`<h2 class="first-post">Welcome to Day! Submit your first post to start building your journal.</h2>`);
-    $(".posts").css("height", "540px");
-    $(".first-post").css("padding", "50px 10px 0px 10px");
+    // $(".posts").css("height", "540px");
+    $(".first-post").css("height", "540px");
+    $(".first-post").css("padding", "50px 15px 0px 15px");
   }
 }
 
@@ -277,6 +278,7 @@ function sideBarMenu() {
 }
 
 function loggedIn() {
+
   getDataFromApi();
   $(".posts").removeClass("hidden");
   $(".sidebar-bg").addClass("hidden");
@@ -327,15 +329,19 @@ $(".home-nav").on("click", ".sidebar-menu", function(event) {
   event.preventDefault();
   sideBarMenu();
 });
+
 $(".rectangle").on("click", ".login", function(event) {
   toggleForm("login", "signup");
 });
+
 $(".rectangle").on("click", ".signup", function(event) {
   toggleForm("signup", "login");
 });
+
 $("#sidebar-login").click(function(event) {
   toggleForm("login", "signup");
 });
+
 $("#sidebar-signup").click(function(event) {
   toggleForm("signup", "login");
 });
