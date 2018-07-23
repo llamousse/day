@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: YtGboQ6Jyy2kxVa1cFgkYO5oC7NPEdcU9xwonziapgaA9SAaekRoLREdC1YssI8ZnAsnDfnEQeI79EEgyKvgYwt1/VFssrY9H8ExP8snPBsnDZhT/tEH95JXLXi6dvAAikagiaTCwiyTzQle9pG9/Fuo+GetvADGVhELz0/6QiyBJe51OcLSFgzVMZTa3Ir406Az4pl4Cb/p/Ea4RBQomAFs/EWch6DcAfLVtMgfVNjCwo/6UBu8svWrL3lFdRreWSuLFehfsAk23V8XrCfvrADQMiQgICsFiY5QN6OCUaJxlgl1sWT9zv9W9z2NwOXcwpNn4br5VFRSekDyb4en5sifJk7RfqwjSOoybpVi9V/mDlMPgiqSpPHI2o7C8KJWYZ8vgt75DJFb6pH/Uwpyyex/E7ISMbDA1V8GkLDPkWBE/Yd0opaTp1WD2DetDV5+VBvEC+molvNveGYs+BbCply55j2Z6mA+sYD1/6+MI8uRDNFZlyo9/9qFdauYRP9E+WUZa0lAVQeWYTvk6osfprG7eX1pyndYCvnlmXiO73jqvC7YZyy0k/iKqt/A7Q/5sgFVxv+kVzdna+OR7j4ms/UgLzO152lxo1TSzfq7hJCOwkRii+w5sEAD9agXyCVZ4lh7LzbW8P9yJ6+aW9y3bCsRSNkohYZhjort7E6WzpI=
+  app: morning-sea-90213
+  on:
+    repo: llamousse/day
