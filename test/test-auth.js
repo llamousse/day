@@ -131,7 +131,8 @@ describe("Auth routes", function() {
           expect(payload.user).to.deep.equal({
             email,
             firstName,
-            lastName
+            lastName,
+            id: payload.user.id
           });
         });
     });

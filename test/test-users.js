@@ -355,7 +355,7 @@ describe("/api/user", function() {
           .then(res => {
             expect(res).to.have.status(201);
             expect(res.body).to.be.an("object");
-            expect(res.body).to.have.keys("email", "firstName", "lastName");
+            expect(res.body).to.have.keys("email", "firstName", "lastName", "id");
             expect(res.body.email).to.equal(email);
             expect(res.body.firstName).to.equal(firstName);
             expect(res.body.lastName).to.equal(lastName);
@@ -386,7 +386,7 @@ describe("/api/user", function() {
           .then(res => {
             expect(res).to.have.status(201);
             expect(res.body).to.be.an("object");
-            expect(res.body).to.have.keys("email", "firstName", "lastName");
+            expect(res.body).to.have.keys("email", "firstName", "lastName", "id");
             expect(res.body.email).to.equal(email);
             expect(res.body.firstName).to.equal(firstName);
             expect(res.body.lastName).to.equal(lastName);
