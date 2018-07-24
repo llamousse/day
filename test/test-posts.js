@@ -1,18 +1,25 @@
 "use strict";
 
 const chai = require("chai");
+const chaiHttp = require("chai-http");
 const faker = require("faker");
 const mongoose = require("mongoose");
-const chaiHttp = require("chai-http");
 const jwt = require("jsonwebtoken");
 
 const { app, runServer, closeServer } = require("../server");
 const { Post } = require("../posts");
-const { TEST_DATABASE_URL } = require("../config");
+const { User } = require("../users");
+const { JWT_SECRET, TEST_DATABASE_URL } = require("../config");
+
+const firstName = "Example";
+const lastName = "User";
+const email = "exampleEmail";
+const password = "examplePass";
 
 const should = chai.should();
-
 chai.use(chaiHttp);
+
+let token;
 
 function tearDownDb() {
   return new Promise((resolve, reject) => {
@@ -44,7 +51,32 @@ describe("/api/posts", function() {
   });
 
   beforeEach(function() {
-    return seedPostData();
+    return User.hashPassword(password).then(password =>
+			User.create({
+				firstName,
+				lastName,
+				email,
+				password
+			})
+			).then( () => {
+				return seedPostData();
+			}).then(() => {
+				token = jwt.sign(
+				{
+					user: {
+						email,
+						firstName,
+						lastName
+					}
+				},
+				JWT_SECRET,
+				{
+					algorithm: 'HS256',
+					subject: email,
+					expiresIn: '7d'
+				}
+				);
+			})
   });
 
   afterEach(function() {
@@ -61,6 +93,7 @@ describe("/api/posts", function() {
       return chai
         .request(app)
         .get("/api/posts")
+  			.set('Authorization', `Bearer ${token}`)
         .then(_res => {
           res = _res;
           res.should.have.status(200);
@@ -79,6 +112,7 @@ describe("/api/posts", function() {
       return chai
         .request(app)
         .get("/api/posts")
+        .set('Authorization', `Bearer ${token}`)
         .then(function(res) {
           res.should.have.status(200);
           res.should.be.json;
@@ -89,11 +123,10 @@ describe("/api/posts", function() {
 
           res.body.forEach(function(post) {
             post.should.be.a("object");
-            post.should.include.keys("title", "date", "description");
+            post.should.include.keys("title", "date", "description", "id");
           });
 
           resPost = res.body[0];
-
           return Post.findById(resPost.id);
 
         })
@@ -117,12 +150,13 @@ describe("/api/posts", function() {
       return chai
         .request(app)
         .post("/api/posts")
+        .set('Authorization', `Bearer ${token}`)
         .send(newPost)
         .then(function(res) {
           res.should.have.status(201);
           res.should.be.json;
           res.body.should.be.a("object");
-          res.body.should.include.keys("title", "date", "description");
+          res.body.should.include.keys("title", "date", "description", "id");
           res.body.title.should.equal(newPost.title);
           res.body.id.should.not.be.null;
           res.body.description.should.equal(newPost.description);
@@ -150,6 +184,7 @@ describe("/api/posts", function() {
           return chai
             .request(app)
             .put(`/api/posts/${post.id}`)
+            .set('Authorization', `Bearer ${token}`)
             .send(updateData);
         })
         .then(res => {
@@ -167,18 +202,40 @@ describe("/api/posts", function() {
     it("should delete a post by id", function() {
       let post;
 
-      return Post.findOne()
-        .then(_post => {
-          post = _post;
-          return chai.request(app).delete(`/api/posts/${post.id}`);
-        })
-        .then(res => {
-          res.should.have.status(204);
-          return Post.findById(post.id);
-        })
-        .then(_post => {
-          should.not.exist(_post);
-        });
+      return Post
+			.findOne()
+			.then(post => post = post.id)
+
+      return chai
+        .request(app)
+        .get(`/api/posts/${post.id}`)
+        .set('Authorization', `Bearer ${token}`)
+
+			.then(res => {
+				return chai.request(app)
+				.delete(`/api/posts/${post}`)
+			})
+			.then(res => {
+				expect(res).to.have.status(204);
+				return Post.findById(post);
+			})
+			.then(post => {
+				expect(post).to.be.null;
+			});
+
+
+
+      // return Post.findOne()
+      //   .then(_post => { post = _post
+      //     return chai.request(app).delete(`/api/posts/${post.id}`);
+      //   })
+      //   .then(res => {
+      //     res.should.have.status(204);
+      //     return Post.findById(post.id);
+      //   })
+      //   .then(_post => {
+      //     should.not.exist(_post);
+      //   });
     });
   });
 });
