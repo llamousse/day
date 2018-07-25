@@ -3,13 +3,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const { User } = require("./models");
+const {User} = require("./models");
 
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../config");
+const {JWT_SECRET} = require("../config");
 const passport = require("passport");
 
 // Post to register a new user
@@ -125,4 +125,4 @@ router.post("/", jsonParser, (req, res) => {
     });
 });
 
-module.exports = { router };
+module.exports = {router};

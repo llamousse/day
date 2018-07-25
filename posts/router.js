@@ -90,4 +90,4 @@ router.put("/:id", jwtAuth, jsonParser, (req, res) => {
     .catch(err => res.status(500).json({ message: "something went wrong" }));
 });
 
-module.exports = { router };
+module.exports = {router};

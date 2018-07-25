@@ -223,8 +223,6 @@ describe("/api/posts", function() {
 				expect(post).to.be.null;
 			});
 
-
-
       // return Post.findOne()
       //   .then(_post => { post = _post
       //     return chai.request(app).delete(`/api/posts/${post.id}`);
@@ -236,6 +234,7 @@ describe("/api/posts", function() {
       //   .then(_post => {
       //     should.not.exist(_post);
       //   });
+      
     });
   });
 });
