@@ -4,8 +4,8 @@ var state = {
 };
 
 // When you load the doc, get the posts
-$(function () {
-  state.token = localStorage.getItem('token');
+$(function() {
+  state.token = localStorage.getItem("token");
   if (state.token) {
     loggedIn();
   }
@@ -34,50 +34,43 @@ function dateParser(date) {
 }
 
 // SIGN UP / LOG IN-OUT
-$('.submit-signup').on('click', function(event) {
+$(".submit-signup").on("click", function(event) {
+  event.preventDefault();
 
-	event.preventDefault();
+  const firstName = $("#firstname").val();
+  const lastName = $("#lastname").val();
+  const email = $("#email").val();
+  const password = $("#password").val();
 
-	const firstName = $('#firstname').val();
-	const lastName = $('#lastname').val();
-	const email = $('#email').val();
-	const password = $('#password').val();
-
-	const settings = {
-		url: "/api/users",
-		data: JSON.stringify({
-			email,
-			password,
-			firstName,
-			lastName
-		}),
+  const settings = {
+    url: "/api/users",
+    data: JSON.stringify({
+      email,
+      password,
+      firstName,
+      lastName
+    }),
     dataType: "json",
     contentType: "application/json",
     type: "POST",
     success: function(data) {
-      console.log(data);
       toggleForm("login", "signup");
     },
-		error: function(error) {
-			let errorLocation = error.responseJSON.location;
-			let errorMessage = error.responseJSON.message;
-			$('.signup-error').html(`Error: ${errorLocation}: ${errorMessage}`);
-			console.log('error', error);
-		}
-	};
+    error: function(error) {
+      let errorLocation = error.responseJSON.location;
+      let errorMessage = error.responseJSON.message;
+      $(".signup-error").html(`Error: ${errorLocation}: ${errorMessage}`);
+      console.log("error", error);
+    }
+  };
 
   $.ajax(settings);
-
 });
 
-$(".submit-login").on('click', function(event) {
-
+$(".submit-login").on("click", function(event) {
   event.preventDefault();
-  const email = $('#login-email').val();
-  const password = $('#login-password').val();
-  const id =
-  console.log(email);
-  console.log(password);
+  const email = $("#login-email").val();
+  const password = $("#login-password").val();
 
   const settings = {
     url: "/api/auth/login",
@@ -89,26 +82,23 @@ $(".submit-login").on('click', function(event) {
     contentType: "application/json",
     type: "POST",
     success: function(data) {
-      console.log(data.authToken);
-      localStorage.setItem('token', data.authToken);
-      console.log(state.token);
+      localStorage.setItem("token", data.authToken);
+      state.token = data.authToken;
       loggedIn();
     },
     error: function(error) {
       let errorMessage = "Email or Password is incorrect.";
-      $('.login-error').html(`${errorMessage}`);
+      $(".login-error").html(`${errorMessage}`);
       console.log("error", error);
     }
   };
 
   $.ajax(settings);
-
 });
 
 $("#logout").click(function(event) {
-  localStorage.setItem('token', "");
+  localStorage.setItem("token", "");
   state.token = "";
-  console.log(state.token);
   loggedOut();
 });
 
@@ -121,9 +111,10 @@ $("#submit-post").click(function(event) {
 // GET DATA / POST DATA API
 
 function postDataToApi() {
+  var datePickerVal = $("#p-date").val();
   var post = {
     title: $("#p-title").val(),
-    date: new Date($("#p-date").val()),
+    date: new Date(datePickerVal + " 0:0:0"),
     description: $("#p-desc").val(),
     type: state.type
   };
@@ -141,8 +132,6 @@ function postDataToApi() {
     };
   }
 
-  console.log(post);
-
   const settings = {
     url: "/api/posts",
     data: JSON.stringify(post),
@@ -150,10 +139,9 @@ function postDataToApi() {
     contentType: "application/json",
     type: "POST",
     headers: {
-      "Authorization": `Bearer ${state.token}`
+      Authorization: `Bearer ${state.token}`
     },
     success: function(data) {
-      console.log(data);
       getDataFromApi();
     },
     error: function(error) {
@@ -169,10 +157,9 @@ function getDataFromApi() {
     dataType: "json",
     type: "GET",
     headers: {
-      "Authorization": `Bearer ${state.token}`
+      Authorization: `Bearer ${state.token}`
     },
     success: function(data) {
-      console.log(data);
       displayPostData(data);
     },
     error: function(error) {
@@ -192,7 +179,9 @@ function displayPostData(data) {
   if (results.length > 0) {
     $(".posts").html(results);
   } else {
-    $(".posts").html(`<h2 class="first-post">Welcome to Day! Submit your first post to start building your journal.</h2>`);
+    $(".posts").html(
+      `<h2 class="first-post">Welcome to Day! Submit your first post to start building your journal.</h2>`
+    );
     $(".first-post").css("height", "540px");
     $(".first-post").css("padding", "50px 15px 0px 15px");
   }
@@ -226,20 +215,22 @@ function renderResult(post, index) {
       marginheight="0"
       marginwidth="0"
       src="https://maps.google.com/maps?q=${post.location.lat},
-      ${post.location.lng}&hl=es;z=14&amp;output=embed">
+      ${post.location.lng}&hl=es;z=8&amp;output=embed">
       </iframe>
       <br />
 
       <small>
       <a href="https://maps.google.com/maps?q=${post.location.lat},
-      ${post.location.lng}&hl=es;z=14&amp;output=embed"
+      ${post.location.lng}&hl=es;z=8&amp;output=embed"
       style="color:#0000FF;text-align:left"
       target="_blank">
       </a>
       </small>
+
+
     `;
   }
-  postHTML += "</div>";
+  postHTML += "    <hr> </div>";
   return postHTML;
 }
 
@@ -276,7 +267,6 @@ function sideBarMenu() {
 }
 
 function loggedIn() {
-
   getDataFromApi();
   $(".posts").removeClass("hidden");
   $(".sidebar-bg").addClass("hidden");

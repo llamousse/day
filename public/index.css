@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
   width: 100%;
@@ -14,6 +15,9 @@ body {
   padding: 0;
 }
 
+hr {
+  width: 20%;
+}
 .wrapper {
   min-height: 100%;
   margin-bottom: -40px;
@@ -204,7 +208,7 @@ input:focus {
 }
 
 .contact-footer {
-  margin: 0;
+  margin-top: 26px;
   padding-top: 15px;
 }
 
@@ -377,7 +381,6 @@ footer {
   text-align: center;
 }
 .post-content img {
-  display: block;
   margin-bottom: 30px;
 }
 .post-content p {
@@ -390,7 +393,6 @@ footer {
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 320px) and (max-width: 450px) {
-
   .journal {
     padding: 50px 45px 10px 45px;
   }
@@ -433,7 +435,6 @@ footer {
 }
 
 @media screen and (min-width: 451px) and (max-width: 768px) {
-
   #p-desc {
     width: 100%;
   }
@@ -477,7 +478,6 @@ footer {
 }
 
 @media screen and (min-width: 769px) and (max-width: 1440px) {
-
   .journal {
     padding: 70px 25px 10px;
   }
