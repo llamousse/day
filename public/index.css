@@ -17,10 +17,13 @@ body {
 
 hr {
   width: 20%;
+  margin-top: 80px;
 }
+
 .wrapper {
   min-height: 100%;
   margin-bottom: -40px;
+  background-color: transparent;
 }
 
 a {
@@ -184,7 +187,7 @@ input:focus {
 }
 
 #coming-soon {
-  margin-top: 30px;
+  margin-top: 60px;
 }
 
 .img-sze {
@@ -208,7 +211,7 @@ input:focus {
 }
 
 .contact-footer {
-  margin-top: 26px;
+  margin-top: 3px;
   padding-top: 15px;
 }
 
@@ -386,9 +389,6 @@ footer {
 .post-content p {
   margin-bottom: 30px;
   font-size: 18px;
-}
-.post-content iframe {
-  margin-bottom: 45px;
 }
 
 /* MEDIA QUERIES */

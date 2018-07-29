@@ -22,6 +22,9 @@ Day gives users the ability to share their daily stories and adventures in a jou
 
 ## Live Site
 Experience Day at: https://morning-sea-90213.herokuapp.com/
+Example:
+* Email: admintest@gmail.com
+* Password: testing123
 
 ## Technical
 * Fully responsive

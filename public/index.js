@@ -226,8 +226,6 @@ function renderResult(post, index) {
       target="_blank">
       </a>
       </small>
-
-
     `;
   }
   postHTML += "    <hr> </div>";
@@ -276,6 +274,7 @@ function loggedIn() {
   $(".bg-journal").removeClass("hidden");
   $(".post-display").removeClass("hidden");
   $("#text").css("background-color", "#B0E2F8");
+  $(".wrapper").css("background-color", "white");
 
   $(".home-nav").on("click", ".sidebar-menu", function(event) {
     event.preventDefault();
@@ -296,6 +295,7 @@ function loggedOut() {
   $(".rectangle").removeClass("hidden");
   $(".about-section").removeClass("hidden");
   $(".bg-journal").addClass("hidden");
+  $(".wrapper").css("background-color", "transparent");
 
   $(".home-nav").on("click", ".sidebar-menu", function(event) {
     event.preventDefault();
