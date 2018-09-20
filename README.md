@@ -21,7 +21,7 @@ Day gives users the ability to share their daily stories and adventures in a jou
 * Post videos, images, maps, and texts to your journal
 
 ## Live Site
-Experience Day at: https://morning-sea-90213.herokuapp.com/
+Experience Day at: https://day-journal.herokuapp.com/
 
 ## Test:
 * Email: admintest@gmail.com
