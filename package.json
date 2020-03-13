@@ -17,7 +17,7 @@
     "express": "^4.14.0",
     "hoek": "^5.0.3",
     "jsonwebtoken": "^8.2.0",
-    "mongoose": "^5.0.6",
+    "mongoose": "^5.7.5",
     "morgan": "^1.7.0",
     "nodemon": "^1.18.3",
     "npm": "^6.2.0",
