@@ -109,7 +109,6 @@ $("#submit-post").click(function(event) {
 });
 
 // GET DATA / POST DATA API
-
 function postDataToApi() {
   var datePickerVal = $("#p-date").val();
   var post = {
@@ -170,7 +169,6 @@ function getDataFromApi() {
 }
 
 // DISPLAY AND RENDER POSTS
-
 function displayPostData(data) {
   var results = data.map((post, index) => {
     return renderResult(post, index);
@@ -233,7 +231,6 @@ function renderResult(post, index) {
 }
 
 // EVENT LISTENER FUNCTIONS
-
 $(window).on("scroll", function() {
   if ($(window).scrollTop() > 300) {
     $(".home-nav").css("background-color", "#94806A");
